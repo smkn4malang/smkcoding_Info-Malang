@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "787604910202",
+    "firebase_url": "https://tugasakhir-9486f.firebaseio.com",
+    "project_id": "tugasakhir-9486f",
+    "storage_bucket": "tugasakhir-9486f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:787604910202:android:0d12d12664eb85fe",
+        "android_client_info": {
+          "package_name": "com.tugasakhir.ta"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "787604910202-bh47ehrp64c93r5opqgeo9s4c0r04luh.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.tugasakhir.ta",
+            "certificate_hash": "fca0cb37c34dbf4eb56c29a3af679249b0584547"
+          }
+        },
+        {
+          "client_id": "787604910202-st6pkgbunm6fqq4cbbg18uo5u9pqcnau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCo4RubcdN3lE2cZhJxiHVxnfw6QbbRaQo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "787604910202-st6pkgbunm6fqq4cbbg18uo5u9pqcnau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

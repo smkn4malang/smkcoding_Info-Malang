@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    android:orientation="vertical"
+    tools:context=".Utama2Activity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:orientation="horizontal"
+        android:gravity="center"
+        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:gravity="center|left"
+            android:layout_weight="1"
+            android:text="Postingan "
+            android:textSize="30dp"
+            android:textColor="#000"
+            android:textStyle="bold"/>
+
+        <ImageButton
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:background="@drawable/home"
+            android:layout_margin="10dp"
+            android:onClick="Utama"
+            />
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        >
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
+                android:textSize="16dp"
+                android:textColor="#000"
+                />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="210dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="10dp"
+                android:background="@drawable/foto2"/>
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            >
+            <Button
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="40dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:background="@drawable/like"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="2"
+                android:layout_height="40dp"
+                android:gravity="left|center"
+                android:text="35"
+                android:layout_marginBottom="5dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#000"
+                />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_weight="1"
+                android:layout_height="40dp"
+                android:layout_marginRight="50dp"
+                android:layout_marginBottom="25dp"
+                android:gravity="center"
+                android:text=". . ."
+                android:textStyle="bold"
+                android:textSize="30dp"
+                android:textColor="#000"
+                />
+            <Button
+                android:layout_width="35dp"
+                android:layout_height="35dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginBottom="5dp"
+                android:gravity="center"
+                android:background="@drawable/komen"
+                />
+
+        </LinearLayout>
+    </LinearLayout>
+
+
+</LinearLayout>
