@@ -1,7 +1,7 @@
 # smkcoding_Info-Malang
 # smkcoding_Info-Malang
 
-![logo](SS_Semenntara/Screenshot_2018-09-02-11-24-08-091_com.tugasakhir.ta.png)
+![Logo](SS_Semenntara/Screenshot_2018-09-02-11-24-08-091_com.tugasakhir.ta.png)
 ![logo](SS_Semenntara/Screenshot_2018-09-02-11-24-13-469_com.tugasakhir.ta.png)
 ![logo](SS_Semenntara/Screenshot_2018-09-02-11-24-29-158_com.tugasakhir.ta.png)
 ![logo](SS_Semenntara/Screenshot_2018-09-02-11-24-49-993_com.tugasakhir.ta.png)
