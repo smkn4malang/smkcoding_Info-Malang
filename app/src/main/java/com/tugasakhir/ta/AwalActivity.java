@@ -39,8 +39,6 @@ import butterknife.OnClick;
 public class AwalActivity extends AppCompatActivity implements
         GoogleApiClient.OnConnectionFailedListener {
 
-    @BindView(R.id.btn_sign_out)
-    Button btnSignOut;
     @BindView(R.id.prof_section)
     LinearLayout profSection;
     @BindView(R.id.btn_login)
@@ -48,8 +46,7 @@ public class AwalActivity extends AppCompatActivity implements
     @BindView(R.id.btn_sign_in)
     Button btnSignIn;
     @BindView(R.id.editText)
-    LinearLayout
-            Edittext;
+    LinearLayout Edittext;
     private  static final int REQ_CODE = 3;
 
     private GoogleApiClient googleApiClient;
@@ -61,10 +58,9 @@ public class AwalActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_awal);
         ButterKnife.bind(this);
-
-        btnSignOut.setVisibility(View.GONE);
 
         mAuth = FirebaseAuth.getInstance();
 
@@ -88,25 +84,12 @@ public class AwalActivity extends AppCompatActivity implements
                 .build();
     }
 
-//    @OnClick(R.id.btn_sign_out)
-//    public void onBtnSignOutClicked(){
-//        signOut();
-//    }
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
 
     }
 
-//    private void signOut(){
-//        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new
-//                                                                                ResultCallback<Status>() {
-//                                                                                    @Override
-//                                                                                    public void onResult(@NonNull Status status) {
-//                                                                                        updateUI(false);
-//                                                                                    }
-//                                                                                });
-//    }
 
     private
     void signIn(){
@@ -145,17 +128,8 @@ public class AwalActivity extends AppCompatActivity implements
 
     private void updateUI(boolean isLogin){
         if(isLogin){
-            profSection.setVisibility(View.GONE);
-            btnLogin.setVisibility(View.GONE);
-            btnSignOut.setVisibility(View.VISIBLE);
-            btnSignIn.setVisibility(View.GONE);
-            Edittext.setVisibility(View.GONE);
-        }else {
-            profSection.setVisibility(View.VISIBLE);
-            btnLogin.setVisibility(View.VISIBLE);
-            btnSignOut.setVisibility(View.GONE);
-            btnSignIn.setVisibility(View.VISIBLE);
-            Edittext.setVisibility(View.VISIBLE);
+            Intent home = new Intent(this, HomeActivity.class);
+            startActivity(home);
         }
     }
 
@@ -178,5 +152,15 @@ public class AwalActivity extends AppCompatActivity implements
         Intent i = new Intent(this, HomeActivity.class);
         startActivity(i);
         finish();
+    }
+
+    public void forgot(View view) {
+        Intent inten = new Intent(this, ForgotPasswordActivity.class);
+        startActivity(inten);
+    }
+
+    public void register(View view) {
+        Intent intent = new Intent(this, RegisterActivity.class);
+        startActivity(intent);
     }
 }
