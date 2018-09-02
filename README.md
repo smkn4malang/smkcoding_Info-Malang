@@ -1,5 +1,5 @@
 # smkcoding_Info-Malang
-# smkcoding_Info-Malang
+# Screenshot Sementara
 
 ![Logo](SS_Sementara/Screenshot_2018-09-02-11-24-08-091_com.tugasakhir.ta.png)
 ![logo](SS_Sementara/Screenshot_2018-09-02-11-24-13-469_com.tugasakhir.ta.png)
