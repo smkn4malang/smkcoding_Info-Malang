@@ -3,36 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#000"
+    android:background="#fff"
     android:orientation="vertical"
-    tools:context=".Utama2Activity">
+    tools:context=".ProfilActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:orientation="horizontal"
-        android:gravity="center"
-        android:background="#fff"
-        >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginLeft="10dp"
-            android:gravity="center|left"
-            android:layout_weight="1"
-            android:text="Profil "
-            android:textSize="22dp"
-            android:textColor="#000"
-            android:textStyle="bold"/>
-
-        <ImageButton
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:background="@drawable/home"
-            android:layout_margin="10dp"
-            android:onClick="Utama"
-            />
-    </LinearLayout>
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -40,35 +14,70 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:background="#000">
+            >
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="360dp"
                 android:orientation="horizontal"
-                android:background="#fff">
+                android:background="#565454"
+                >
 
                 <ImageView
                     android:id="@+id/foto"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/ic_launcher_background"
-                    android:layout_margin="10dp"/>
-
-                <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
+                    android:layout_centerInParent="true"/>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:orientation="horizontal"
+                    android:gravity="center"
+                    >
+                    <TextView
+                        android:id="@+id/edit_profil"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:gravity="center|left"
+                        android:layout_weight="1"
+                        android:text="Edit Profil "
+                        android:textSize="22dp"
+                        android:textColor="#fff"
+                        android:textStyle="bold"/>
+
+                    <ImageButton
+                        android:id="@+id/tambah"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/plus"
+                        android:layout_margin="10dp"
+                        android:onClick="tambah"/>
+
+                    <ImageButton
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:background="@drawable/home2"
+                        android:layout_margin="10dp"
+                        android:onClick="Utama"
+                        />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="370dp"
+                    android:layout_height="wrap_content"
                     android:orientation="vertical"
                     android:layout_margin="10dp"
-                    android:gravity="center|left">
+                    android:layout_alignParentBottom="true"
+                    android:layout_centerInParent="true">
 
                     <TextView
                         android:id="@+id/nama"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Name"
-                        android:textColor="#000"
-                        android:textSize="18dp"
+                        android:textColor="#fff"
+                        android:textSize="25dp"
                         android:textStyle="bold"
                         />
                     <TextView
@@ -76,18 +85,18 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="Email"
-                        android:textSize="16dp"
+                        android:textSize="20dp"
+                        android:textColor="#fff"
                         />
 
                 </LinearLayout>
 
-            </LinearLayout>
+            </RelativeLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:layout_marginTop="1sp"
                 android:background="#fff">
 
                 <LinearLayout
@@ -102,13 +111,13 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/ic_launcher_background"/>
+                        android:background="@drawable/account"/>
                     <TextView
                         android:id="@+id/nama2"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         android:textSize="18dp"
                         android:layout_weight="1"
                         android:textStyle="bold"
@@ -127,7 +136,7 @@
                         android:layout_margin="10dp"
                         android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
                         android:textSize="16dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         />
 
                 </LinearLayout>
@@ -138,7 +147,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/ic_launcher_background"/>
 
                 </LinearLayout>
@@ -178,7 +188,7 @@
                         android:text=". . ."
                         android:textStyle="bold"
                         android:textSize="30dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         />
                     <Button
                         android:layout_width="35dp"
@@ -210,13 +220,13 @@
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/ic_launcher_background"/>
+                        android:background="@drawable/account"/>
                     <TextView
                         android:id="@+id/nama3"
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         android:textSize="18dp"
                         android:layout_weight="1"
                         android:textStyle="bold"
@@ -246,7 +256,8 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:background="@drawable/ic_launcher_background"/>
 
                 </LinearLayout>

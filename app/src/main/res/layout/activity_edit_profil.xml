@@ -4,11 +4,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#fff"
     android:orientation="vertical"
     tools:context=".EditProfilActivity">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="40dp"
         android:gravity="right|center"
         android:layout_margin="5dp"
         >
@@ -20,7 +21,7 @@
             android:layout_weight="1"
             android:text="Edit Profil"
             android:textSize="22dp"
-            android:textColor="#000"
+            android:textColor="#303030"
             android:textStyle="bold"/>
 
         <Button
@@ -30,118 +31,144 @@
             android:onClick="Utama"/>
 
     </LinearLayout>
-    <LinearLayout
+
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
-        android:layout_margin="5dp"
-        android:gravity="center"
-        android:orientation="horizontal"
-        >
+        android:layout_height="match_parent">
 
-        <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginLeft="10dp"
-            android:background="@drawable/akun"
-            />
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        >
-
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/username"/>
-
-        <EditText
-            android:id="@+id/namaEdit"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:hint="User Name"
-            android:textColor="#000"
-            android:gravity="center|left"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:inputType="textPersonName"
-            />
+            android:orientation="vertical">
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        >
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_margin="5dp"
+                android:gravity="center"
+                android:orientation="horizontal"
+                >
 
-        <ImageView
-            android:layout_width="35dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/jk"/>
+                <ImageView
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginLeft="10dp"
+                    android:background="@drawable/account"
+                    />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="Jenis Kelamin"
-            android:textColor="#000"
-            android:gravity="center|left"
-            android:layout_marginLeft="5dp"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:inputType="textPersonName"
-            />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                >
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="55dp"
-        android:layout_margin="5dp"
-        android:orientation="horizontal"
-        >
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/username"/>
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/phone"/>
+                <EditText
+                    android:id="@+id/namaEdit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="User Name"
+                    android:textColor="#303030"
+                    android:backgroundTint="#FF01A3CC"
+                    android:gravity="center|left"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    />
 
-        <EditText
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="No. Telfon"
-            android:gravity="center|left"
-            android:layout_marginLeft="10dp"
-            android:textSize="20dp"
-            android:layout_weight="1"
-            android:inputType="number"
-            />
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                >
 
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center|bottom"
-        android:layout_marginBottom="10dp"
-        >
-        <Button
-            android:id="@+id/save"
-            android:layout_width="350dp"
-            android:layout_height="wrap_content"
-            android:text="SAVE"
-            android:textSize="25dp"
-            android:textStyle="bold"
-            />
-    </LinearLayout>
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginRight="7dp"
+                    android:background="@drawable/jk"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="Jenis Kelamin"
+                    android:textColor="#000"
+                    android:backgroundTint="#FF01A3CC"
+                    android:gravity="center|left"
+                    android:layout_marginLeft="5dp"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:inputType="textPersonName"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/phone"/>
+
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:hint="No. Telfon"
+                    android:gravity="center|left"
+                    android:layout_marginLeft="10dp"
+                    android:textSize="20dp"
+                    android:layout_weight="1"
+                    android:inputType="number"
+                    android:textColor="#303030"
+                    android:backgroundTint="#FF01A3CC"
+                    />
+
+            </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginRight="1dp"
+                android:layout_marginTop="148dp">
+
+                <Button
+                    android:id="@+id/tambah"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Save"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_margin="3dp"
+                    android:backgroundTint="#01a3cc"
+                    android:backgroundTintMode="multiply"
+                    android:onClick="profil"/>
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </ScrollView>
 
 
 </LinearLayout>

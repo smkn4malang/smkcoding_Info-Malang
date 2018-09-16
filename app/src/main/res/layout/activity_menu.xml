@@ -4,12 +4,12 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="#fff"
     tools:context=".MenuActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:layout_margin="5dp"
+        android:layout_height="40dp"
         >
         <TextView
             android:layout_width="match_parent"
@@ -19,7 +19,7 @@
             android:layout_weight="1"
             android:text="Menu"
             android:textSize="22dp"
-            android:textColor="#000"
+            android:textColor="#303030"
             android:textStyle="bold"/>
 
         <Button
@@ -32,32 +32,51 @@
 
     </LinearLayout>
     <LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="150dp"
-    android:gravity="center"
-        android:layout_margin="5dp"
-    android:orientation="horizontal"
-    >
+        android:layout_width="match_parent"
+        android:layout_height="130dp"
+        android:gravity="center|right"
+        android:orientation="horizontal"
+        android:background="#FF1AAED4"
+        >
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/nama3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
-        android:gravity="right|center"
-        android:layout_weight="1"
-        android:text="nama"
-        android:layout_marginLeft="10dp"
-        android:textStyle="bold"
-        android:textSize="20dp"
-        android:textColor="#000"
-        />
+            <TextView
+                android:id="@+id/nama3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="right|center"
+                android:layout_weight="1"
+                android:text="nama"
+                android:layout_marginLeft="10dp"
+                android:textStyle="bold"
+                android:textSize="20dp"
+                android:textColor="#fff"
+                />
+            <TextView
+                android:id="@+id/email3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="10dp"
+                android:gravity="right|center"
+                android:layout_weight="1"
+                android:text="email"
+                android:layout_marginLeft="10dp"
+                android:textSize="18dp"
+                android:textColor="#fff"
+                />
+
+        </LinearLayout>
+
         <ImageView
             android:id="@+id/foto3"
             android:layout_width="100dp"
             android:layout_height="100dp"
-            android:layout_marginLeft="5dp"
-            android:background="@drawable/akun"
+            android:layout_margin="10dp"
+            android:background="@drawable/account"
             />
 
     </LinearLayout>
@@ -66,25 +85,34 @@
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
+        android:background="#000"
+        android:onClick="EditProfil"
         >
 
-        <ImageView
-            android:layout_width="30dp"
-            android:layout_height="30dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/edit"
-            android:onClick="EditProfil"/>
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:background="#fff"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="center"
+                android:background="@drawable/edit"/>
+        </LinearLayout>
+
+
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:layout_marginLeft="5dp"
-            android:textColor="#000"
-            android:layout_gravity="center"
+            android:textColor="#303030"
+            android:layout_gravity="center|top"
             android:textSize="20dp"
             android:text="Edit Profil"
+            android:background="#fff"
             />
 
     </LinearLayout>
@@ -93,52 +121,68 @@
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
+        android:onClick="Tentang"
+        android:background="#000"
         >
 
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:background="#fff"
+            >
         <ImageView
             android:layout_width="30dp"
             android:layout_height="35dp"
             android:layout_gravity="center"
             android:layout_margin="5dp"
-            android:background="@drawable/about"
-            android:onClick="Tentang"/>
+            android:background="@drawable/about"/>
+        </LinearLayout>
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="80dp"
+            android:layout_height="55dp"
             android:layout_weight="1"
             android:gravity="left|center"
-            android:layout_marginLeft="5dp"
-            android:textColor="#000"
-            android:layout_gravity="center"
+            android:textColor="#FF303030"
+            android:layout_gravity="center|top"
             android:textSize="20dp"
             android:text="Tentang Kami"
+            android:background="#fff"
             />
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/btn_sign_out"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
+        android:background="#000"
         >
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:background="#fff"
+            >
+            <ImageView
+                android:layout_width="30dp"
+                android:layout_height="35dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/out"/>
+        </LinearLayout>
 
-        <ImageView
-            android:id="@+id/btn_sign_out"
-            android:layout_width="30dp"
-            android:layout_height="35dp"
-            android:layout_gravity="center"
-            android:layout_margin="5dp"
-            android:background="@drawable/out"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_weight="1"
-            android:layout_height="80dp"
+            android:layout_height="55dp"
             android:gravity="left|center"
-            android:layout_marginLeft="5dp"
-            android:layout_gravity="center"
-            android:textColor="#000"
+            android:layout_gravity="center|top"
+            android:textColor="#FF303030"
             android:textSize="20dp"
             android:text="Log Out"
+            android:background="#fff"
             />
 
 

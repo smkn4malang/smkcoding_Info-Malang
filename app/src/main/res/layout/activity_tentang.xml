@@ -18,9 +18,9 @@
             android:layout_marginLeft="10dp"
             android:gravity="center|left"
             android:layout_weight="1"
-            android:text="Postingan Saya"
+            android:text="Tentang kami"
             android:textSize="22dp"
-            android:textColor="#000"
+            android:textColor="#303030"
             android:textStyle="bold"/>
 
         <Button
@@ -41,7 +41,7 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="50dp"
-            android:background="@drawable/akun"
+            android:background="@drawable/account"
             />
 
         <TextView
@@ -54,7 +54,7 @@
             android:layout_marginRight="10dp"
             android:text="Blalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lblaBlalala labla bllb lbla"
             android:textSize="20dp"
-            android:textColor="#000"
+            android:textColor="#303030"
             />
 
     </LinearLayout>

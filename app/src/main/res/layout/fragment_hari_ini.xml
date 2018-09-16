@@ -28,22 +28,25 @@
                     android:gravity="center"
                     android:layout_weight="1.5">
 
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/akun"/>
+                        android:background="@drawable/account"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
                         android:paddingBottom="30dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         android:textSize="18dp"
                         android:layout_weight="1"
                         android:textStyle="bold"
                         android:gravity="left|center"
-                        android:text="M Rafli Ramadani"/>
+                        android:text="Nama"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -56,8 +59,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
-                        android:textSize="16dp"
-                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textColor="#303030"
                         />
 
                 </LinearLayout>
@@ -68,8 +71,9 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ic_launcher_background"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#565454"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -134,22 +138,25 @@
                     android:gravity="center"
                     android:layout_weight="1.5">
 
-                    <TextView
-                        android:layout_width="70dp"
-                        android:layout_height="70dp"
+                    <ImageView
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_margin="10dp"
-                        android:background="@drawable/akun"/>
+                        android:background="@drawable/account"/>
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginRight="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:layout_marginLeft="5dp"
                         android:paddingBottom="30dp"
-                        android:textColor="#000"
+                        android:textColor="#303030"
                         android:textSize="18dp"
                         android:layout_weight="1"
                         android:textStyle="bold"
                         android:gravity="left|center"
-                        android:text="M Rafli Ramadani"/>
+                        android:text="Nama"/>
 
                 </LinearLayout>
                 <LinearLayout
@@ -162,8 +169,8 @@
                         android:layout_height="match_parent"
                         android:layout_margin="10dp"
                         android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
-                        android:textSize="16dp"
-                        android:textColor="#000"
+                        android:textSize="15dp"
+                        android:textColor="#303030"
                         />
 
                 </LinearLayout>
@@ -174,8 +181,9 @@
                     <ImageView
                         android:layout_width="match_parent"
                         android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/ic_launcher_background"/>
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
+                        android:background="#565454"/>
 
                 </LinearLayout>
                 <LinearLayout

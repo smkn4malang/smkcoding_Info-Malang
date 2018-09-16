@@ -5,12 +5,14 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,24 +38,27 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-public class AwalActivity extends AppCompatActivity implements
-        GoogleApiClient.OnConnectionFailedListener {
-
+public class AwalActivity extends AppCompatActivity
+        implements GoogleApiClient.OnConnectionFailedListener {
+    //Google Login
     @BindView(R.id.prof_section)
     LinearLayout profSection;
     @BindView(R.id.btn_login)
     SignInButton btnLogin;
-    @BindView(R.id.btn_sign_in)
-    Button btnSignIn;
     @BindView(R.id.editText)
     LinearLayout Edittext;
     private  static final int REQ_CODE = 3;
 
     private GoogleApiClient googleApiClient;
 
-    private FirebaseAuth mAuth;
-
     private FirebaseAuth.AuthStateListener mAuthStateListener;
+    //Email Login
+    private EditText inputEmail, inputPassword;
+    private TextView btnSignup, btnReset;
+    private Button SignUP;
+    private FirebaseAuth mAuth;
+    private FirebaseAuth BAuth;
+//    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,9 +66,14 @@ public class AwalActivity extends AppCompatActivity implements
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_awal);
         ButterKnife.bind(this);
+//Google Login
+//-------------------------------------------------------------------------
 
         mAuth = FirebaseAuth.getInstance();
-
+        if (mAuth.getCurrentUser() != null) {
+            startActivity(new Intent(this, HomeActivity.class));
+            finish();
+        }
         mAuthStateListener = new FirebaseAuth.AuthStateListener(){
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuthAuth){
@@ -82,8 +92,79 @@ public class AwalActivity extends AppCompatActivity implements
                 .enableAutoManage(this, this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions)
                 .build();
-    }
+//Email Login
+//-------------------------------------------------------------------------------------
+        inputEmail = (EditText) findViewById(R.id.email);
+        inputPassword = (EditText) findViewById(R.id.password);
+        btnSignup = (TextView) findViewById(R.id.txt_register);
+        SignUP = (Button) findViewById(R.id.btn_sign_in);
+        btnReset = (TextView) findViewById(R.id.txt_forgot);
+//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
+        //Get Firebase auth instance
+        BAuth = FirebaseAuth.getInstance();
+
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AwalActivity.this, RegisterActivity.class));
+            }
+        });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(AwalActivity.this, ForgotPasswordActivity.class));
+            }
+        });
+
+        SignUP.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String email = inputEmail.getText().toString();
+                final String password = inputPassword.getText().toString();
+
+                if (TextUtils.isEmpty(email)) {
+                    Toast.makeText(getApplicationContext(), "Emailnya lur", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+                if (TextUtils.isEmpty(password)) {
+                    Toast.makeText(getApplicationContext(), "Passwordnya lur", Toast.LENGTH_SHORT).show();
+                    return;
+                }
+
+//                progressBar.setVisibility(View.VISIBLE);
+
+                //authenticate user
+                BAuth.signInWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(AwalActivity.this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                // If sign in fails, display a message to the user. If sign in succeeds
+                                // the auth state listener will be notified and logic to handle the
+                                // signed in user can be handled in the listener.
+                                //progressBar.setVisibility(View.GONE);
+                                if (!task.isSuccessful()) {
+                                    // there was an error
+                                    if (password.length() < 6) {
+                                        inputPassword.setError(getString(R.string.minimum_password));
+                                    } else {
+                                        Toast.makeText(AwalActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
+                                    }
+                                } else {
+                                    Intent intent = new Intent(AwalActivity.this, HomeActivity.class);
+                                    startActivity(intent);
+                                    finish();
+                                }
+                            }
+                        });
+            }
+        });
+
+
+    }
+//Google Login
 
     @Override
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
@@ -121,8 +202,8 @@ public class AwalActivity extends AppCompatActivity implements
 
                         }
                     });
-        }else{
-            Toast.makeText(this, "Check your connection", Toast.LENGTH_LONG).show();
+        }else {
+            Toast.makeText(this, "Lihat koneksi anda", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -130,6 +211,7 @@ public class AwalActivity extends AppCompatActivity implements
         if(isLogin){
             Intent home = new Intent(this, HomeActivity.class);
             startActivity(home);
+            finish();
         }
     }
 
@@ -148,19 +230,5 @@ public class AwalActivity extends AppCompatActivity implements
         signIn();
     }
 
-    public void Home(View view) {
-        Intent i = new Intent(this, HomeActivity.class);
-        startActivity(i);
-        finish();
-    }
 
-    public void forgot(View view) {
-        Intent inten = new Intent(this, ForgotPasswordActivity.class);
-        startActivity(inten);
-    }
-
-    public void register(View view) {
-        Intent intent = new Intent(this, RegisterActivity.class);
-        startActivity(intent);
-    }
 }

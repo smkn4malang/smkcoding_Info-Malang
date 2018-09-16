@@ -16,9 +16,6 @@ public class EditProfilActivity extends AppCompatActivity {
     public static final String EXTRA_NAME ="EXTRANAME" ;
     @BindView(R.id.namaEdit)
     EditText Editnama;
-    @BindView(R.id.save)
-    Button Save;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +28,13 @@ public class EditProfilActivity extends AppCompatActivity {
     public void Utama(View view) {
         Intent menu = new Intent(EditProfilActivity.this, HomeActivity.class);
         startActivity(menu);
+        finish();
     }
 
-//Edit Profil
-//    @OnClick(R.id.save)
-//    public void onViewClicked(){
-//        String name = Editnama.getText().toString();
-//        Intent intent = new Intent(this, ProfilActivity.class);
-//        intent.putExtra(EXTRA_NAME, name);
-//        setResult(RESULT_OK, intent);
-//        finish();
-//    }
+
+    public void profil(View view) {
+        Intent i = new Intent (this, ProfilActivity.class);
+        startActivity(i);
+        finish();
+    }
 }

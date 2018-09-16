@@ -28,4 +28,9 @@ public class Utama2Activity extends AppCompatActivity {
         Intent profil = new Intent(Utama2Activity.this, ProfilActivity.class);
         startActivity(profil);
     }
+
+    public void tambah(View view) {
+        Intent tambah = new Intent(Utama2Activity.this, TambahActivity.class);
+        startActivity(tambah);
+    }
 }
