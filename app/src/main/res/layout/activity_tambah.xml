@@ -19,7 +19,7 @@
 
             <LinearLayout
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="45dp"
                 >
                 <TextView
                     android:layout_width="match_parent"
@@ -39,7 +39,7 @@
                     android:background="@drawable/home"
                     android:layout_marginRight="5dp"
                     android:layout_gravity="center"
-                    android:onClick="Utama"/>
+                    android:onClick="home"/>
 
             </LinearLayout>
             <LinearLayout
@@ -47,46 +47,60 @@
                 android:layout_height="wrap_content">
 
                 <EditText
+                    android:id="@+id/edit_text_file_name"
                     android:layout_width="match_parent"
-                    android:layout_height="200dp"
+                    android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="top"
                     android:hint="Tulis Keterangan . . ."
                     android:textColor="#303030"
                     android:textSize="16dp"
-                    android:background="#fff"/>
+                    android:backgroundTint="@color/colorPrimaryDark"/>
 
             </LinearLayout>
 
-            <LinearLayout
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="190dp">
+                android:layout_height="350dp">
 
                 <ImageView
+                    android:id="@+id/image_view"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="#565454" />
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"/>
 
-            </LinearLayout>
+            </RelativeLayout>
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginRight="1dp"
-                android:layout_marginTop="105dp">
+                android:orientation="horizontal">
 
                 <Button
-                    android:id="@+id/tambah"
+                    android:id="@+id/button_choose_image"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="Ambil Gambar"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:textStyle="bold"
+                    android:layout_margin="3dp"
+                    android:backgroundTint="#01a3cc"
+                    android:backgroundTintMode="multiply"/>
+
+                <Button
+                    android:id="@+id/button_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
                     android:text="Posting"
                     android:textColor="#fff"
                     android:textSize="18dp"
                     android:textStyle="bold"
                     android:layout_margin="3dp"
                     android:backgroundTint="#01a3cc"
-                    android:backgroundTintMode="multiply"
-                    android:onClick="Utama"/>
+                    android:backgroundTintMode="multiply"/>
 
             </LinearLayout>
 

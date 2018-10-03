@@ -270,4 +270,8 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
 
+    public void Tambah(View view) {
+        Intent tambah = new Intent(this, TambahActivity.class);
+        startActivity(tambah);
+    }
 }

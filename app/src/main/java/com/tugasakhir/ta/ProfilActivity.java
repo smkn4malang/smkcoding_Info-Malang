@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -28,6 +30,14 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,14 +47,18 @@ public class ProfilActivity extends AppCompatActivity
 
     private ImageView Foto;
     private TextView Nama;
-    private ImageView Foto2;
-    private TextView Nama2;
-    private ImageView Foto3;
-    private TextView Nama3;
     private TextView Email;
     private TextView edit;
     private ImageButton Tambah;
     private FirebaseAuth mauth;
+
+//    private RecyclerView mRecyclerView;
+//    private ImageAdapter mAdapter;
+//
+//    private ProgressBar mProgressCircle;
+//
+//    private DatabaseReference mDatabaseRef;
+//    private List<Upload> mUploads;
 
     private GoogleApiClient googleApiClient;
     @Override
@@ -55,10 +69,6 @@ public class ProfilActivity extends AppCompatActivity
         ButterKnife.bind(this);
 
 
-        Foto3 = (ImageView) findViewById(R.id.foto3);
-        Nama3 = (TextView) findViewById(R.id.nama3);
-        Foto2 = (ImageView) findViewById(R.id.foto2);
-        Nama2 = (TextView) findViewById(R.id.nama2);
         Foto = (ImageView) findViewById(R.id.foto);
         Nama = (TextView) findViewById(R.id.nama);
         Email = (TextView) findViewById(R.id.email);
@@ -91,6 +101,37 @@ public class ProfilActivity extends AppCompatActivity
         //get current user
         final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         setDataToView(user);
+//-----------------------------------------------------------
+//        mRecyclerView = findViewById(R.id.recycler_view);
+//        mRecyclerView.setHasFixedSize(true);
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//
+//        mProgressCircle = findViewById(R.id.progress_circle);
+//
+//        mUploads = new ArrayList<>();
+//
+//        mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+//
+//        mDatabaseRef.addValueEventListener(new ValueEventListener() {
+//            @Override
+//            public void onDataChange(DataSnapshot dataSnapshot) {
+//                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+//                    Upload upload = postSnapshot.getValue(Upload.class);
+//                    mUploads.add(upload);
+//                }
+//
+//                mAdapter = new ImageAdapter(ProfilActivity.this, mUploads);
+//
+//                mRecyclerView.setAdapter(mAdapter);
+//                mProgressCircle.setVisibility(View.INVISIBLE);
+//            }
+//
+//            @Override
+//            public void onCancelled(DatabaseError databaseError) {
+//                Toast.makeText(ProfilActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+//                mProgressCircle.setVisibility(View.INVISIBLE);
+//            }
+//        });
     }
     //Email
     @SuppressLint("SetTextI18n")
@@ -136,17 +177,14 @@ public class ProfilActivity extends AppCompatActivity
         }
     }
 
+
     private void handleSignInResult(GoogleSignInResult result) {
         if(result.isSuccess()){
             GoogleSignInAccount account = result.getSignInAccount();
             Nama.setText(account.getDisplayName());
-            Nama2.setText(account.getDisplayName());
-            Nama3.setText(account.getDisplayName());
             Email.setText(account.getEmail());
 
             Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto);
-            Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto2);
-            Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto3);
         }
     }
 

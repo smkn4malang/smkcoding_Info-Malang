@@ -46,7 +46,7 @@
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:hint="Email . . ."
-                    android:textColor="#000"
+                    android:textColor="#303030"
                     android:backgroundTint="#FF01A3CC"
                     android:inputType="textEmailAddress"/>
 
@@ -56,7 +56,7 @@
                     android:layout_width="300dp"
                     android:layout_height="50dp"
                     android:hint="Password . . ."
-                    android:textColor="#000"
+                    android:textColor="#303030"
                     android:backgroundTint="#FF01A3CC"
                     android:inputType="textPassword"/>
 

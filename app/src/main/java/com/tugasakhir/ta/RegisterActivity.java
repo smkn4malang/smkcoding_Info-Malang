@@ -82,7 +82,8 @@ public class RegisterActivity extends AppCompatActivity {
                                     Toast.makeText(RegisterActivity.this, "Gagal membuat akun" + task.getException(),
                                             Toast.LENGTH_SHORT).show();
                                 } else {
-                                    startActivity(new Intent(RegisterActivity.this, ProfilActivity.class));
+                                    Intent inten = new Intent(RegisterActivity.this, AwalActivity.class);
+                                    startActivity(inten);
                                     finish();
                                 }
                             }
