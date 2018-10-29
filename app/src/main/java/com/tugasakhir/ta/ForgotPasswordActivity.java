@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -21,7 +22,8 @@ public class ForgotPasswordActivity extends AppCompatActivity {
     private EditText inputEmail;
     private Button btnReset;
     private FirebaseAuth auth;
-    //    private ProgressBar progressBar;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,7 +31,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
         setContentView(R.layout.activity_forgot_password);
         inputEmail = (EditText) findViewById(R.id.email);
         btnReset = (Button) findViewById(R.id.btn_reset);
-//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         auth = FirebaseAuth.getInstance();
 
@@ -39,12 +41,19 @@ public class ForgotPasswordActivity extends AppCompatActivity {
 
                 String email = inputEmail.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplication(), "Isi emailmu lur", Toast.LENGTH_SHORT).show();
+                if (email.isEmpty()) {
+                    inputEmail.setError("Masukan Email");
+                    inputEmail.requestFocus();
                     return;
                 }
 
-//                progressBar.setVisibility(View.VISIBLE);
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    inputEmail.setError("Masukan Email yang benar");
+                    inputEmail.requestFocus();
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
                 auth.sendPasswordResetEmail(email)
                         .addOnCompleteListener(new OnCompleteListener<Void>() {
                             @Override
@@ -55,7 +64,7 @@ public class ForgotPasswordActivity extends AppCompatActivity {
                                     Toast.makeText(ForgotPasswordActivity.this, "Gagal mengirim pesan ke email anda!", Toast.LENGTH_SHORT).show();
                                 }
 
-//                                progressBar.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
                             }
                         });
             }

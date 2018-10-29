@@ -1,13 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="#fff"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MenuActivity">
 
     <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         >
@@ -31,63 +33,73 @@
             android:onClick="Utama"/>
 
     </LinearLayout>
-    <LinearLayout
+    <RelativeLayout
+        android:id="@+id/linear2"
+        android:layout_below="@+id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="130dp"
+        android:layout_height="170dp"
         android:gravity="center|right"
-        android:orientation="horizontal"
         android:background="#FF1AAED4"
         >
         <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="15dp"
+            android:gravity="center|left"
             android:orientation="vertical">
+
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/foto3"
+                android:layout_width="70dp"
+                android:layout_height="70dp"
+                android:src="@drawable/akun"
+                app:civ_border_width="1dp"
+                app:civ_border_color="#fff"
+                />
+
+            <TextView
+                android:id="@+id/url"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"/>
 
             <TextView
                 android:id="@+id/nama3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:gravity="right|center"
-                android:layout_weight="1"
                 android:text="nama"
-                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="18dp"
+                android:layout_marginLeft="8dp"
                 android:textColor="#fff"
                 />
             <TextView
                 android:id="@+id/email3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="10dp"
                 android:gravity="right|center"
-                android:layout_weight="1"
+                android:layout_marginLeft="8dp"
                 android:text="email"
-                android:layout_marginLeft="10dp"
                 android:textSize="18dp"
                 android:textColor="#fff"
                 />
 
         </LinearLayout>
 
-        <ImageView
-            android:id="@+id/foto3"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_margin="10dp"
-            android:background="@drawable/account"
-            />
 
-    </LinearLayout>
+    </RelativeLayout>
 
     <LinearLayout
+        android:id="@+id/tambah"
+        android:layout_below="@+id/linear2"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
         android:onClick="Tambah"
-        android:background="#000"
         >
 
         <LinearLayout
@@ -111,19 +123,21 @@
             android:gravity="left|center"
             android:textColor="#FF303030"
             android:layout_gravity="center|top"
-            android:textSize="20dp"
+            android:textSize="18dp"
             android:text="Tambah Postingan"
             android:background="#fff"
+            android:layout_marginLeft="15dp"
             />
 
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/edit"
+        android:layout_below="@+id/tambah"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
-        android:background="#000"
         android:onClick="EditProfil"
         >
 
@@ -142,25 +156,27 @@
 
 
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="314dp"
             android:layout_height="55dp"
-            android:layout_weight="1"
-            android:gravity="left|center"
-            android:textColor="#303030"
             android:layout_gravity="center|top"
-            android:textSize="20dp"
-            android:text="Edit Profil"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
             android:background="#fff"
-            />
+            android:gravity="left|center"
+            android:text="Edit Profil"
+            android:textColor="#303030"
+            android:textSize="18dp" />
+
 
     </LinearLayout>
     <LinearLayout
+        android:id="@+id/tentang"
+        android:layout_below="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
         android:onClick="Tentang"
-        android:background="#000"
         >
 
         <LinearLayout
@@ -176,26 +192,27 @@
             android:layout_margin="5dp"
             android:background="@drawable/about"/>
         </LinearLayout>
+
         <TextView
-            android:layout_width="match_parent"
+            android:layout_width="309dp"
             android:layout_height="55dp"
-            android:layout_weight="1"
-            android:gravity="left|center"
-            android:textColor="#FF303030"
             android:layout_gravity="center|top"
-            android:textSize="20dp"
-            android:text="Tentang Kami"
+            android:layout_marginLeft="15dp"
+            android:layout_weight="1"
             android:background="#fff"
-            />
+            android:gravity="left|center"
+            android:text="Tentang Kami"
+            android:textColor="#FF303030"
+            android:textSize="18dp" />
 
     </LinearLayout>
     <LinearLayout
+        android:layout_below="@+id/tentang"
         android:id="@+id/btn_sign_out"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_margin="5dp"
         android:orientation="horizontal"
-        android:background="#000"
         >
         <LinearLayout
             android:layout_width="50dp"
@@ -218,12 +235,19 @@
             android:gravity="left|center"
             android:layout_gravity="center|top"
             android:textColor="#FF303030"
-            android:textSize="20dp"
+            android:textSize="18dp"
+            android:layout_marginLeft="15dp"
             android:text="Log Out"
             android:background="#fff"
             />
 
 
     </LinearLayout>
+    <ProgressBar
+        android:id="@+id/progress_circle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        />
 
-</LinearLayout>
+</RelativeLayout>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,6 +8,7 @@
     android:orientation="vertical"
     tools:context=".EditProfilActivity">
     <LinearLayout
+        android:id="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:gravity="right|center"
@@ -33,6 +34,7 @@
     </LinearLayout>
 
     <ScrollView
+        android:layout_below="@+id/linear"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -43,20 +45,31 @@
             android:orientation="vertical">
 
             <LinearLayout
+
                 android:layout_width="match_parent"
-                android:layout_height="150dp"
+                android:layout_height="wrap_content"
                 android:layout_margin="5dp"
                 android:gravity="center"
-                android:orientation="horizontal"
+                android:orientation="vertical"
                 >
 
-                <ImageView
-                    android:id="@+id/account"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/account"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/image_view"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:src="@drawable/akun"
+                    app:civ_border_width="1dp"
+                    app:civ_border_color="#FF303030"
                     />
+                <TextView
+                    android:id="@+id/editTextEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif"
+                    android:inputType="textEmailAddress"
+                    android:layout_marginTop="4dp"
+                    android:text="Email"
+                    android:textSize="18dp" />
 
             </LinearLayout>
             <LinearLayout
@@ -64,6 +77,7 @@
                 android:layout_height="55dp"
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
+                android:gravity="center"
                 >
 
                 <ImageView
@@ -73,19 +87,35 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/username"/>
 
-                <EditText
-                    android:id="@+id/namaEdit"
+                <!--<EditText-->
+                    <!--android:id="@+id/namaEdit"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:hint="User Name"-->
+                    <!--android:textColor="#303030"-->
+                    <!--android:backgroundTint="#FF01A3CC"-->
+                    <!--android:gravity="center|left"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--/>-->
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/name"
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="User Name"
-                    android:textColor="#303030"
-                    android:backgroundTint="#FF01A3CC"
-                    android:gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/image_view">
+
+                    <EditText
+                        android:id="@+id/editTextName"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:hint="Username"
+                        android:inputType="text"
+                        android:layout_marginLeft="10dp"
+                        android:textColorHint="@color/colorPrimaryDark" />
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
@@ -93,6 +123,7 @@
                 android:layout_height="55dp"
                 android:layout_margin="5dp"
                 android:orientation="horizontal"
+                android:gravity="center"
                 >
 
                 <ImageView
@@ -103,19 +134,35 @@
                     android:layout_marginRight="7dp"
                     android:background="@drawable/jk"/>
 
-                <EditText
-                    android:id="@+id/jkEdit"
+                <!--<EditText-->
+                    <!--android:id="@+id/jkEdit"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:hint="Jenis Kelamin"-->
+                    <!--android:textColor="#000"-->
+                    <!--android:backgroundTint="#FF01A3CC"-->
+                    <!--android:gravity="center|left"-->
+                    <!--android:layout_marginLeft="5dp"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:inputType="textPersonName"-->
+                    <!--/>-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Jenis Kelamin"
-                    android:textColor="#000"
-                    android:backgroundTint="#FF01A3CC"
-                    android:gravity="center|left"
-                    android:layout_marginLeft="5dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:inputType="textPersonName"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name">
+
+                    <EditText
+                        android:id="@+id/gender"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:hint="Gender"
+                        android:inputType="text"
+                        android:layout_marginLeft="5dp"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
@@ -132,46 +179,125 @@
                     android:layout_margin="5dp"
                     android:background="@drawable/phone"/>
 
-                <EditText
-                    android:id="@+id/noEdit"
+                <!--<EditText-->
+                    <!--android:id="@+id/noEdit"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="match_parent"-->
+                    <!--android:hint="No. Telfon"-->
+                    <!--android:gravity="center|left"-->
+                    <!--android:layout_marginLeft="10dp"-->
+                    <!--android:textSize="20dp"-->
+                    <!--android:layout_weight="1"-->
+                    <!--android:inputType="number"-->
+                    <!--android:textColor="#303030"-->
+                    <!--android:backgroundTint="#FF01A3CC"-->
+                    <!--/>-->
+                <android.support.design.widget.TextInputLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="No. Telfon"
-                    android:gravity="center|left"
-                    android:layout_marginLeft="10dp"
-                    android:textSize="20dp"
-                    android:layout_weight="1"
-                    android:inputType="number"
-                    android:textColor="#303030"
-                    android:backgroundTint="#FF01A3CC"
-                    />
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name">
+
+                    <EditText
+                        android:id="@+id/phone"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:hint="Phone Number"
+                        android:inputType="text"
+                        android:layout_marginLeft="10dp"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                </android.support.design.widget.TextInputLayout>
 
             </LinearLayout>
             <LinearLayout
                 android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_margin="5dp"
+                android:orientation="horizontal"
+                >
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="30dp"
+                    android:layout_gravity="center"
+                    android:layout_margin="5dp"
+                    android:background="@drawable/phone"/>
+
+                <!--<EditText-->
+                <!--android:id="@+id/noEdit"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:hint="No. Telfon"-->
+                <!--android:gravity="center|left"-->
+                <!--android:layout_marginLeft="10dp"-->
+                <!--android:textSize="20dp"-->
+                <!--android:layout_weight="1"-->
+                <!--android:inputType="number"-->
+                <!--android:textColor="#303030"-->
+                <!--android:backgroundTint="#FF01A3CC"-->
+                <!--/>-->
+                <android.support.design.widget.TextInputLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/name">
+
+                    <EditText
+                        android:id="@+id/alamat"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif"
+                        android:hint="Address"
+                        android:inputType="text"
+                        android:layout_marginLeft="10dp"
+                        android:textColorHint="@color/colorPrimaryDark" />
+
+                </android.support.design.widget.TextInputLayout>
+
+            </LinearLayout>
+            <LinearLayout
+
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="1dp"
                 android:layout_marginRight="1dp"
-                android:layout_marginTop="148dp">
+                android:layout_marginTop="88dp">
 
+                <!--<Button-->
+                    <!--android:id="@+id/tambah"-->
+                    <!--android:layout_width="match_parent"-->
+                    <!--android:layout_height="wrap_content"-->
+                    <!--android:text="Save"-->
+                    <!--android:textColor="#fff"-->
+                    <!--android:textSize="18dp"-->
+                    <!--android:textStyle="bold"-->
+                    <!--android:layout_margin="3dp"-->
+                    <!--android:backgroundTint="#01a3cc"-->
+                    <!--android:backgroundTintMode="multiply"-->
+                    <!--android:onClick="profil"/>-->
                 <Button
-                    android:id="@+id/tambah"
+                    android:id="@+id/button_upload"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="Save"
-                    android:textColor="#fff"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentBottom="true"
                     android:layout_margin="3dp"
                     android:backgroundTint="#01a3cc"
                     android:backgroundTintMode="multiply"
-                    android:onClick="profil"/>
+                    android:text="SAVE"
+                    android:textColor="#fff"
+                    android:textSize="18dp"
+                    android:textStyle="bold" />
 
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+    <ProgressBar
+        android:id="@+id/progress_bar"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:layout_centerInParent="true" />
 
-
-</LinearLayout>
+</RelativeLayout>

@@ -38,7 +38,7 @@ public class TambahActivity extends AppCompatActivity {
     private Button mButtonUpload;
     private EditText mEditTextFileName;
     private ImageView mImageView;
-    private ProgressBar mProgressBar;
+    private ProgressBar mProgressCircle;
 
     private Uri mImageUri;
 
@@ -57,7 +57,8 @@ public class TambahActivity extends AppCompatActivity {
         mButtonUpload = findViewById(R.id.button_upload);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
         mImageView = findViewById(R.id.image_view);
-//        mProgressBar = findViewById(R.id.progress_bar);
+
+        mProgressCircle = findViewById(R.id.progress_circle);
 
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
@@ -79,6 +80,7 @@ public class TambahActivity extends AppCompatActivity {
                 }
             }
         });
+
     }
 
     private void openFileChooser() {
@@ -107,7 +109,8 @@ public class TambahActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        if (mImageUri != null) {
+        if (mEditTextFileName != null) {
+            mProgressCircle.setVisibility(View.VISIBLE);
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
 
@@ -125,19 +128,14 @@ public class TambahActivity extends AppCompatActivity {
 
                 }
             }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+
                 @Override
                 public void onComplete(@NonNull Task<Uri> task) {
+
+
+
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-//                        Upload friendlyMessage = new Upload(null, mUsername, downloadUri.toString());
-//                        mMessagesDatabaseReference.push().setValue(friendlyMessage);
-//                        Handler handler = new Handler();
-//                        handler.postDelayed(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                mProgressBar.setProgress(0);
-//                            }
-//                        }, 500);
                         Toast.makeText(TambahActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                         Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                                 downloadUri.toString());
@@ -153,12 +151,8 @@ public class TambahActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(this, "No file selected", Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Tulis Keterangan", Toast.LENGTH_SHORT).show();
         }
-    }
-    private void openImagesActivity() {
-        Intent intent = new Intent(this, ProfilActivity.class);
-        startActivity(intent);
     }
 
     //------------------------------------------------------------

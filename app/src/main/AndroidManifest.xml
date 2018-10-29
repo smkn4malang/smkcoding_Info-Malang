@@ -28,7 +28,8 @@
         <activity android:name=".AwalActivity" />
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
-        <activity android:name=".TambahActivity"></activity>
+        <activity android:name=".TambahActivity" />
+        <activity android:name=".NewUser"></activity>
     </application>
 
 </manifest>

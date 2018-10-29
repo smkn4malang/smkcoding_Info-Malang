@@ -1,10 +1,14 @@
 package com.tugasakhir.ta;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -30,6 +34,12 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -37,15 +47,19 @@ import butterknife.OnClick;
 import butterknife.Optional;
 
 public class MenuActivity extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener {
-
+    private static final String TAG = "ViewDatabase";
     @BindView(R.id.btn_sign_out)
     LinearLayout out;
     private ImageView Foto3;
-    private TextView Nama3;
-    private TextView Email3;
+    private TextView Nama3, Email3, url;
+    private ProgressBar mProgressCircle;
 
     private GoogleApiClient googleApiClient;
     private FirebaseAuth mAuth;
+    private FirebaseAuth.AuthStateListener mListener;
+    private String userID, url2 ;
+    private FirebaseDatabase mData;
+    private DatabaseReference mRef;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,8 +72,33 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
         Foto3 = (ImageView) findViewById(R.id.foto3);
         Nama3 = (TextView) findViewById(R.id.nama3);
         Email3 = (TextView) findViewById(R.id.email3);
+        mProgressCircle = findViewById(R.id.progress_circle);
+        mProgressCircle.setVisibility(View.GONE);
 
+        //ambil data user email
+//-----------------------------------------------------------------------------------
+        url = (TextView) findViewById(R.id.url);
 
+        mAuth = FirebaseAuth.getInstance();
+        mData = FirebaseDatabase.getInstance();
+        mRef = mData.getReference();
+        FirebaseUser user =mAuth.getCurrentUser();
+        userID = user.getUid();
+
+//        notif();
+
+        mRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+//-----------------------------------------------------------------------------------
         Foto3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -79,11 +118,10 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
                 .build();
 //----------------------------------------------------------------------------
         //get firebase auth instance
-        mAuth = FirebaseAuth.getInstance();
 
         //get current user
-        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        setDataToView(user);
+//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+//        setDataToView(user);
 
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
@@ -101,18 +139,60 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
         out.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                signOut();
+                mAuth.signOut();
+                Intent i = new Intent(MenuActivity.this, AwalActivity.class);
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                startActivity(i);
+
             }
         });
     }
-    //    ----------------------------------------------------------
-    @SuppressLint("SetTextI18n")
-    private void setDataToView(FirebaseUser user) {
+    //    proses user email
+//-----------------------------------------------------------------------------
+    private void showData(DataSnapshot dataSnapshot) {
+        for(DataSnapshot ds : dataSnapshot.getChildren()){
+            User user = new User();
+            user.setName(ds.child(userID).getValue(User.class).getName());
+            user.setEmail(ds.child(userID).getValue(User.class).getEmail());
+            user.setAlamat(ds.child(userID).getValue(User.class).getAlamat());
+            user.setImageUrl(ds.child(userID).getValue(User.class).getImageUrl());
 
-        Email3.setText(user.getEmail());
+//            String uuu;
+            Nama3.setText(user.getName());
+            Email3.setText(user.getEmail());
+            url.setText(user.getImageUrl());
+            url2 = url.toString();
+            Picasso.with(this)
+                    .load(user.getImageUrl())
+                    .into(Foto3);
 
-
+        }
     }
+
+//    private void notif() {
+//        mListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if(user != null){
+//                    Log.d(TAG, "onAuthStateChanged:sign_in" + user.getUid());
+//                    toastMessage("Berhasil Masuk Dengan Email " + user.getEmail());
+//                }else{
+//                    Log.d(TAG, "onAuthStateChanged:sign_out" + user.getUid());
+//                    toastMessage("Gagal Masuk");
+//                }
+//            }
+//        };
+//    }
+//-----------------------------------------------------------------------------
+    //    ----------------------------------------------------------
+//    @SuppressLint("SetTextI18n")
+//    private void setDataToView(FirebaseUser user) {
+//
+//        Email3.setText(user.getEmail());
+//
+//
+//    }
 
     // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
@@ -126,7 +206,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
                 startActivity(new Intent(MenuActivity.this, AwalActivity.class));
                 finish();
             } else {
-                setDataToView(user);
+//                setDataToView(user);
 
             }
         }
@@ -228,50 +308,56 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
     }
 
 
-    @OnClick(R.id.btn_sign_out)
-    public void onBtnSignOutClicked(){
-        signOut();
-    }
+//    @OnClick(R.id.btn_sign_out)
+//    public void onBtnSignOutClicked(){
+//        signOut();
+//        mProgressCircle.setVisibility(View.VISIBLE);
+//    }
 
-    public void signOut(){
-        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new
-                                                                                ResultCallback<Status>() {
-                                                                                    @Override
-                                                                                    public void onResult(@NonNull Status status) {
-                                                                                        if(status.isSuccess()){
-                                                                                            updateUI();
-                                                                                        }else{
+//    public void signOut(){
+//        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new
+//                                                                                ResultCallback<Status>() {
+//                                                                                    @Override
+//                                                                                    public void onResult(@NonNull Status status) {
+//                                                                                        if(status.isSuccess()){
+//                                                                                            updateUI();
+//                                                                                        }else{
+//
+//                                                                                        }
+//                                                                                    }
+//                                                                                });
+//        mAuth.signOut();
+//
+//
+//// this listener will be called when there is change in firebase user session
+//        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
+//            @Override
+//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
+//                FirebaseUser user = firebaseAuth.getCurrentUser();
+//                if (user == null) {
+//                    startActivity(new Intent(MenuActivity.this, AwalActivity.class));
+//                    finish();
+//                }
+//            }
+//        };
+//    }
 
-                                                                                        }
-                                                                                    }
-                                                                                });
-        mAuth.signOut();
-
-
-// this listener will be called when there is change in firebase user session
-        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if (user == null) {
-                    // user auth state is changed - user is null
-                    // launch login activity
-                    startActivity(new Intent(MenuActivity.this, AwalActivity.class));
-                    finish();
-                }
-            }
-        };
-    }
-
-    public void updateUI(){
-        Intent i = new Intent(this, AwalActivity.class);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
-        startActivity(i);
-    }
+//    public void updateUI(){
+//        mAuth.signOut();
+//        Intent i = new Intent(this, AwalActivity.class);
+//        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+//        startActivity(i);
+//
+//    }
 
 
     public void Tambah(View view) {
         Intent tambah = new Intent(this, TambahActivity.class);
         startActivity(tambah);
     }
+    public void toastMessage(String message){
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
+    }
+
+
 }

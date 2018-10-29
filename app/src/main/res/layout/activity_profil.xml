@@ -8,6 +8,7 @@
 
 
     <ScrollView
+        android:id="@+id/scrol"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <RelativeLayout
@@ -22,12 +23,21 @@
                 android:orientation="horizontal"
                 android:background="#565454"
                 >
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textSize="20dp"
+                    android:textStyle="bold"
+                    android:textColor="#fff"
+                    android:layout_centerInParent="true"
+                    android:text="No Image"/>
 
                 <ImageView
                     android:id="@+id/foto"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:layout_centerInParent="true"/>
+                    android:layout_centerInParent="true"
+                    android:scaleType="centerCrop"/>
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
@@ -73,6 +83,13 @@
                     android:background="@drawable/gradient">
 
                     <TextView
+                        android:id="@+id/url"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:visibility="gone"
+                        />
+
+                    <TextView
                         android:id="@+id/nama"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -95,9 +112,23 @@
                         android:layout_marginBottom="10dp"
                         />
 
-                </LinearLayout>
-            </RelativeLayout>
 
+                </LinearLayout>
+
+            </RelativeLayout>
+            <ProgressBar
+                android:id="@+id/progress_circle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                />
+
+            <!--<android.support.v7.widget.RecyclerView-->
+                <!--android:layout_below="@+id/relativ"-->
+                <!--android:id="@+id/recycler_view"-->
+                <!--android:layout_width="match_parent"-->
+                <!--android:layout_height="match_parent"-->
+                <!--android:scrollbars="vertical"/>-->
         </RelativeLayout>
 
     </ScrollView>

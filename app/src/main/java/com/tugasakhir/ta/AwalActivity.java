@@ -1,11 +1,14 @@
 package com.tugasakhir.ta;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Patterns;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
@@ -47,9 +50,10 @@ public class AwalActivity extends AppCompatActivity
     SignInButton btnLogin;
     @BindView(R.id.editText)
     LinearLayout Edittext;
-    private  static final int REQ_CODE = 3;
+    private static final int REQ_CODE = 3;
 
     private GoogleApiClient googleApiClient;
+//    private ProgressBar mProgressCircle;
 
     private FirebaseAuth.AuthStateListener mAuthStateListener;
     //Email Login
@@ -58,7 +62,7 @@ public class AwalActivity extends AppCompatActivity
     private Button SignUP;
     private FirebaseAuth mAuth;
     private FirebaseAuth BAuth;
-//    private ProgressBar progressBar;
+    private ProgressBar progressBar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,9 +78,10 @@ public class AwalActivity extends AppCompatActivity
             startActivity(new Intent(this, HomeActivity.class));
             finish();
         }
-        mAuthStateListener = new FirebaseAuth.AuthStateListener(){
+
+        mAuthStateListener = new FirebaseAuth.AuthStateListener() {
             @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuthAuth){
+            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuthAuth) {
 
             }
 
@@ -99,7 +104,9 @@ public class AwalActivity extends AppCompatActivity
         btnSignup = (TextView) findViewById(R.id.txt_register);
         SignUP = (Button) findViewById(R.id.btn_sign_in);
         btnReset = (TextView) findViewById(R.id.txt_forgot);
-//        progressBar = (ProgressBar) findViewById(R.id.progressBar);
+//        mProgressCircle = findViewById(R.id.progress_circle);
+
+        progressBar = (ProgressBar) findViewById(R.id.progressBar);
 
         //Get Firebase auth instance
         BAuth = FirebaseAuth.getInstance();
@@ -107,34 +114,53 @@ public class AwalActivity extends AppCompatActivity
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AwalActivity.this, RegisterActivity.class));
+
+                Intent ii = new Intent(AwalActivity.this, RegisterActivity.class);
+                ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(ii);
             }
         });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                startActivity(new Intent(AwalActivity.this, ForgotPasswordActivity.class));
+                Intent ii = new Intent(AwalActivity.this, ForgotPasswordActivity.class);
+                ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                startActivity(ii);
             }
         });
 
         SignUP.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String email = inputEmail.getText().toString();
-                final String password = inputPassword.getText().toString();
+                final String email = inputEmail.getText().toString().trim();
+                final String password = inputPassword.getText().toString().trim();
 
-                if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(getApplicationContext(), "Emailnya lur", Toast.LENGTH_SHORT).show();
+                if (email.isEmpty()) {
+                    inputEmail.setError("Masukan Email");
+                    inputEmail.requestFocus();
                     return;
                 }
 
-                if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(getApplicationContext(), "Passwordnya lur", Toast.LENGTH_SHORT).show();
+                if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
+                    inputEmail.setError("Masukan Email yang benar");
+                    inputEmail.requestFocus();
                     return;
                 }
 
-//                progressBar.setVisibility(View.VISIBLE);
+                if (password.isEmpty()) {
+                    inputPassword.setError("Masukan Password");
+                    inputPassword.requestFocus();
+                    return;
+                }
+
+                if (password.length() < 8) {
+                    inputPassword.setError("Password minimal 8 karakter");
+                    inputPassword.requestFocus();
+                    return;
+                }
+
+                progressBar.setVisibility(View.VISIBLE);
 
                 //authenticate user
                 BAuth.signInWithEmailAndPassword(email, password)
@@ -144,18 +170,16 @@ public class AwalActivity extends AppCompatActivity
                                 // If sign in fails, display a message to the user. If sign in succeeds
                                 // the auth state listener will be notified and logic to handle the
                                 // signed in user can be handled in the listener.
-                                //progressBar.setVisibility(View.GONE);
-                                if (!task.isSuccessful()) {
+                                progressBar.setVisibility(View.GONE);
+                                if (task.isSuccessful()) {
                                     // there was an error
-                                    if (password.length() < 6) {
-                                        inputPassword.setError(getString(R.string.minimum_password));
-                                    } else {
-                                        Toast.makeText(AwalActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
-                                    }
-                                } else {
+
                                     Intent intent = new Intent(AwalActivity.this, HomeActivity.class);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
                                     startActivity(intent);
                                     finish();
+                                } else {
+                                    Toast.makeText(AwalActivity.this, getString(R.string.auth_failed), Toast.LENGTH_LONG).show();
                                 }
                             }
                         });
@@ -167,48 +191,47 @@ public class AwalActivity extends AppCompatActivity
 //Google Login
 
     @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult){
+    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
 
 
-    private
-    void signIn(){
+    private void signIn() {
         Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
         startActivityForResult(intent, REQ_CODE);
     }
 
-    private void handleResult(GoogleSignInResult result){
-
-        if(result.isSuccess()){
+    private void handleResult(GoogleSignInResult result) {
+        progressBar.setVisibility(View.VISIBLE);
+        if (result.isSuccess()) {
             GoogleSignInAccount account = result.getSignInAccount();
 
-            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(),null);
+            AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
             mAuth.signInWithCredential(credential)
                     .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                         @Override
                         public void onComplete(@NonNull Task<AuthResult> task) {
 
-                            if(task.isSuccessful()){
+                            if (task.isSuccessful()) {
                                 FirebaseUser firebaseUser = mAuth.getCurrentUser();
 //                                txtName.setText(firebaseUser.getDisplayName());
 //                                txtEmail.setText(firebaseUser.getEmail());
 //
 //                                Glide.with(AwalActivity.this).load(firebaseUser.getPhotoUrl().toString()).into(imgProfile);
                                 updateUI(true);
-                            }else {
+                            } else {
                                 updateUI(false);
                             }
 
                         }
                     });
-        }else {
+        } else {
             Toast.makeText(this, "Lihat koneksi anda", Toast.LENGTH_LONG).show();
         }
     }
 
-    private void updateUI(boolean isLogin){
-        if(isLogin){
+    private void updateUI(boolean isLogin) {
+        if (isLogin) {
             Intent home = new Intent(this, HomeActivity.class);
             startActivity(home);
             finish();
@@ -216,18 +239,33 @@ public class AwalActivity extends AppCompatActivity
     }
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data){
-        super.onActivityResult(requestCode,resultCode,data);
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-        if(requestCode == REQ_CODE){
+        if (requestCode == REQ_CODE) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             handleResult(result);
         }
     }
 
     @OnClick(R.id.btn_login)
-    public void onViewClicked(){
+    public void onViewClicked() {
         signIn();
+    }
+
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        AwalActivity.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
     }
 
 
