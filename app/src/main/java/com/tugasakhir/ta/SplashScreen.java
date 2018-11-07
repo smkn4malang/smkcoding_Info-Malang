@@ -1,10 +1,12 @@
 package com.tugasakhir.ta;
 
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -64,7 +66,9 @@ public class SplashScreen extends AppCompatActivity {
                         .getActiveNetworkInfo();
 
                 if (activeNetwork != null && activeNetwork.isConnectedOrConnecting()) {
-                    startActivity(new Intent(SplashScreen.this, AwalActivity.class));
+                    Intent splas = new Intent(SplashScreen.this, AwalActivity.class);
+                    splas.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                    startActivity(splas);
                     finish();
                 } else {
                     mProgressCircle.setVisibility(View.GONE);
@@ -86,4 +90,18 @@ public class SplashScreen extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        new AlertDialog.Builder(this)
+                .setTitle("Exit")
+                .setMessage("Are you sure you want to exit?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        SplashScreen.this.finish();
+                    }
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
 }

@@ -36,14 +36,13 @@ public class HomeActivity extends AppCompatActivity {
 
     public void Menu(View view) {
         Intent menu = new Intent(this, MenuActivity.class);
+        menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menu);
-//        finish();
+        finish();
     }
 
     public void Profil(View view) {
-        Intent profil = new Intent(this, ProfilActivity.class);
-        startActivity(profil);
-//        finish();
+        startActivity(new Intent(this, ProfilActivity.class));
     }
     @Override
     public void onBackPressed() {
@@ -58,6 +57,13 @@ public class HomeActivity extends AppCompatActivity {
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    public void Tambah(View view) {
+        Intent plus = new Intent(this, TambahActivity.class);
+        plus.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(plus);
+        finish();
     }
 }
 

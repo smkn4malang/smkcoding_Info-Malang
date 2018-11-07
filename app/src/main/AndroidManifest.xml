@@ -6,7 +6,7 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@drawable/out"
+        android:icon="@drawable/news"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
@@ -29,7 +29,7 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".TambahActivity" />
-        <activity android:name=".NewUser"></activity>
+        <activity android:name=".BaruActivity"></activity>
     </application>
 
 </manifest>

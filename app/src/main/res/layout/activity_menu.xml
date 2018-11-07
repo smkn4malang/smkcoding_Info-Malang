@@ -6,6 +6,12 @@
     android:background="#fff"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".MenuActivity">
+    <ProgressBar
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="35dp"
+        android:layout_marginLeft="30dp"
+        />
 
     <LinearLayout
         android:visibility="gone"
@@ -38,9 +44,17 @@
         android:layout_below="@+id/linear1"
         android:layout_width="match_parent"
         android:layout_height="170dp"
-        android:gravity="center|right"
         android:background="#FF1AAED4"
         >
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:orientation="horizontal"
+            android:layout_centerInParent="true"
+            android:background="@drawable/sampul"
+            >
+
+        </RelativeLayout>
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -48,14 +62,14 @@
             android:gravity="center|left"
             android:orientation="vertical">
 
-
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/foto3"
                 android:layout_width="70dp"
                 android:layout_height="70dp"
-                android:src="@drawable/akun"
+                android:src="@color/cardview_dark_background"
                 app:civ_border_width="1dp"
                 app:civ_border_color="#fff"
+                android:layout_marginBottom="5dp"
                 />
 
             <TextView
@@ -70,10 +84,10 @@
                 android:layout_height="wrap_content"
                 android:gravity="right|center"
                 android:text="nama"
-                android:layout_marginTop="20dp"
                 android:textStyle="bold"
                 android:textSize="18dp"
                 android:layout_marginLeft="8dp"
+                android:layout_marginTop="5dp"
                 android:textColor="#fff"
                 />
             <TextView
@@ -86,7 +100,6 @@
                 android:textSize="18dp"
                 android:textColor="#fff"
                 />
-
         </LinearLayout>
 
 
@@ -94,10 +107,10 @@
 
     <LinearLayout
         android:id="@+id/tambah"
-        android:layout_below="@+id/linear2"
+        android:layout_below="@+id/profil"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
         android:orientation="horizontal"
         android:onClick="Tambah"
         >
@@ -124,9 +137,51 @@
             android:textColor="#FF303030"
             android:layout_gravity="center|top"
             android:textSize="18dp"
-            android:text="Tambah Postingan"
+            android:text="Add New Posts"
             android:background="#fff"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
+            />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/profil"
+        android:layout_below="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="55dp"
+        android:layout_marginLeft="15dp"
+        android:orientation="horizontal"
+        android:onClick="profil"
+        >
+
+        <LinearLayout
+            android:layout_width="50dp"
+            android:layout_height="55dp"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:background="#fff"
+            >
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_gravity="center"
+                android:layout_margin="5dp"
+                android:background="@drawable/account"
+                android:backgroundTint="#000"/>
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="55dp"
+            android:layout_weight="1"
+            android:gravity="left|center"
+            android:textColor="#FF303030"
+            android:layout_gravity="center|top"
+            android:textSize="18dp"
+            android:text="My Profile"
+            android:background="#fff"
+            android:layout_marginLeft="20dp"
+            android:onClick="profil"
             />
 
     </LinearLayout>
@@ -136,7 +191,7 @@
         android:layout_below="@+id/tambah"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
         android:orientation="horizontal"
         android:onClick="EditProfil"
         >
@@ -159,11 +214,11 @@
             android:layout_width="314dp"
             android:layout_height="55dp"
             android:layout_gravity="center|top"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="#fff"
             android:gravity="left|center"
-            android:text="Edit Profil"
+            android:text="Edit Profile"
             android:textColor="#303030"
             android:textSize="18dp" />
 
@@ -174,7 +229,7 @@
         android:layout_below="@+id/edit"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
         android:orientation="horizontal"
         android:onClick="Tentang"
         >
@@ -197,11 +252,11 @@
             android:layout_width="309dp"
             android:layout_height="55dp"
             android:layout_gravity="center|top"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:layout_weight="1"
             android:background="#fff"
             android:gravity="left|center"
-            android:text="Tentang Kami"
+            android:text="About"
             android:textColor="#FF303030"
             android:textSize="18dp" />
 
@@ -211,7 +266,7 @@
         android:id="@+id/btn_sign_out"
         android:layout_width="match_parent"
         android:layout_height="55dp"
-        android:layout_margin="5dp"
+        android:layout_marginLeft="15dp"
         android:orientation="horizontal"
         >
         <LinearLayout
@@ -236,7 +291,7 @@
             android:layout_gravity="center|top"
             android:textColor="#FF303030"
             android:textSize="18dp"
-            android:layout_marginLeft="15dp"
+            android:layout_marginLeft="20dp"
             android:text="Log Out"
             android:background="#fff"
             />

@@ -26,11 +26,10 @@
                     android:layout_marginLeft="10dp"
                     android:gravity="center|left"
                     android:layout_weight="1"
-                    android:text="Cancel"
+                    android:text="Add Information"
                     android:textSize="22dp"
                     android:textColor="#303030"
-                    android:textStyle="bold"
-                    android:onClick="profil"/>
+                    android:textStyle="bold"/>
 
                 <Button
                     android:layout_width="30dp"
@@ -51,7 +50,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
                     android:gravity="top"
-                    android:hint="Tulis Keterangan . . ."
+                    android:hint="Added New Information"
                     android:textColor="#303030"
                     android:textSize="16dp"
                     android:backgroundTint="@color/colorPrimaryDark"/>
@@ -80,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Ambil Gambar"
+                    android:text="Put Image"
                     android:textColor="#fff"
                     android:textSize="18dp"
                     android:textStyle="bold"
@@ -93,7 +92,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:text="Posting"
+                    android:text="Post"
                     android:textColor="#fff"
                     android:textSize="18dp"
                     android:textStyle="bold"

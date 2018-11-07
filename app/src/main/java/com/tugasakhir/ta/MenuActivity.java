@@ -41,6 +41,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -57,7 +59,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
     private GoogleApiClient googleApiClient;
     private FirebaseAuth mAuth;
     private FirebaseAuth.AuthStateListener mListener;
-    private String userID, url2 ;
+    private String userID ;
     private FirebaseDatabase mData;
     private DatabaseReference mRef;
 
@@ -81,13 +83,13 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
         mAuth = FirebaseAuth.getInstance();
         mData = FirebaseDatabase.getInstance();
-        mRef = mData.getReference();
+        mRef = mData.getReference("users");
         FirebaseUser user =mAuth.getCurrentUser();
         userID = user.getUid();
 
 //        notif();
 
-        mRef.addValueEventListener(new ValueEventListener() {
+        mRef.child(userID).addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                 showData(dataSnapshot);
@@ -106,16 +108,16 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-        GoogleSignInOptions signInOptions = new
-                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions)
-                .build();
+//        GoogleSignInOptions signInOptions = new
+//                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+//                .requestIdToken(getString(R.string.default_web_client_id))
+//                .requestEmail()
+//                .build();
+//
+//        googleApiClient = new GoogleApiClient.Builder(this)
+//                .enableAutoManage(this, this)
+//                .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions)
+//                .build();
 //----------------------------------------------------------------------------
         //get firebase auth instance
 
@@ -141,7 +143,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
             public void onClick(View v) {
                 mAuth.signOut();
                 Intent i = new Intent(MenuActivity.this, AwalActivity.class);
-                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP );
+                i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                 startActivity(i);
 
             }
@@ -150,23 +152,15 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
     //    proses user email
 //-----------------------------------------------------------------------------
     private void showData(DataSnapshot dataSnapshot) {
-        for(DataSnapshot ds : dataSnapshot.getChildren()){
-            User user = new User();
-            user.setName(ds.child(userID).getValue(User.class).getName());
-            user.setEmail(ds.child(userID).getValue(User.class).getEmail());
-            user.setAlamat(ds.child(userID).getValue(User.class).getAlamat());
-            user.setImageUrl(ds.child(userID).getValue(User.class).getImageUrl());
+            User user = dataSnapshot.getValue(User.class);
+            Nama3.setText(Objects.requireNonNull(user).getName());
+            Email3.setText(Objects.requireNonNull(user).getEmail());
 
-//            String uuu;
-            Nama3.setText(user.getName());
-            Email3.setText(user.getEmail());
             url.setText(user.getImageUrl());
-            url2 = url.toString();
             Picasso.with(this)
                     .load(user.getImageUrl())
                     .into(Foto3);
 
-        }
     }
 
 //    private void notif() {
@@ -214,36 +208,17 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     };
 
-    //sign out method
-//    public void signOut() {
-//        mAuth.signOut();
-//
-//
-//// this listener will be called when there is change in firebase user session
-//        FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if (user == null) {
-//                    // user auth state is changed - user is null
-//                    // launch login activity
-//                    startActivity(new Intent(MenuActivity.this, AwalActivity.class));
-//                    finish();
-//                }
-//            }
-//        };
-//    }
 
     @Override
     protected void onResume() {
         super.onResume();
     }
 
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        mAuth.addAuthStateListener(authListener);
-//    }
+    @Override
+    public void onStart() {
+        super.onStart();
+        mAuth.addAuthStateListener(authListener);
+    }
 
     @Override
     public void onStop() {
@@ -257,6 +232,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void Utama(View view) {
         Intent back = new Intent(MenuActivity.this, HomeActivity.class);
+        back.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(back);
         finish();
     }
@@ -264,11 +240,13 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void Tentang(View view) {
         Intent tentang = new Intent(MenuActivity.this, TentangActivity.class);
+        tentang.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(tentang);
     }
 
     public void EditProfil(View view) {
         Intent edit = new Intent(MenuActivity.this, EditProfilActivity.class);
+        edit.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(edit);
     }
 
@@ -277,35 +255,35 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
-    @Override
-    protected void onStart(){
-        super.onStart();
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if(opr.isDone()){
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        }else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
-        mAuth.addAuthStateListener(authListener);
-    }
+//    @Override
+//    protected void onStart(){
+//        super.onStart();
+//        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
+//        if(opr.isDone()){
+//            GoogleSignInResult result = opr.get();
+//            handleSignInResult(result);
+//        }else {
+//            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
+//                @Override
+//                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
+//                    handleSignInResult(googleSignInResult);
+//                }
+//            });
+//        }
+//        mAuth.addAuthStateListener(authListener);
+//    }
 
-    private void handleSignInResult(GoogleSignInResult result) {
-        if(result.isSuccess()){
-            GoogleSignInAccount account = result.getSignInAccount();
-            Nama3.setText(account.getDisplayName());
-            Email3.setText(account.getEmail());
-
-            Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto3);
-        }else{
-
-        }
-    }
+//    private void handleSignInResult(GoogleSignInResult result) {
+//        if(result.isSuccess()){
+//            GoogleSignInAccount account = result.getSignInAccount();
+//            Nama3.setText(account.getDisplayName());
+//            Email3.setText(account.getEmail());
+//
+//            Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto3);
+//        }else{
+//
+//        }
+//    }
 
 
 //    @OnClick(R.id.btn_sign_out)
@@ -313,7 +291,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 //        signOut();
 //        mProgressCircle.setVisibility(View.VISIBLE);
 //    }
-
+//
 //    public void signOut(){
 //        Auth.GoogleSignInApi.signOut(googleApiClient).setResultCallback(new
 //                                                                                ResultCallback<Status>() {
@@ -326,7 +304,7 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 //                                                                                        }
 //                                                                                    }
 //                                                                                });
-//        mAuth.signOut();
+////        mAuth.signOut();
 //
 //
 //// this listener will be called when there is change in firebase user session
@@ -353,11 +331,25 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     public void Tambah(View view) {
         Intent tambah = new Intent(this, TambahActivity.class);
+        tambah.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(tambah);
     }
     public void toastMessage(String message){
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+    @Override
+    public void onBackPressed() {
+        Intent inn = new Intent(this, HomeActivity.class);
+        inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(inn);
+        finish();
+    }
 
 
+    public void profil(View view) {
+        Intent inn = new Intent(this, ProfilActivity.class);
+        inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(inn);
+        finish();
+    }
 }

@@ -17,7 +17,17 @@ public class TentangActivity extends AppCompatActivity {
 
     public void Utama(View view) {
         Intent menu = new Intent(TentangActivity.this, HomeActivity.class);
+        menu.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(menu);
         finish();
     }
+
+    @Override
+    public void onBackPressed() {
+        Intent inn = new Intent(this, HomeActivity.class);
+        inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(inn);
+        finish();
+    }
+
 }

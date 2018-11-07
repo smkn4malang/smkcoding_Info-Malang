@@ -45,6 +45,9 @@ public class RegisterActivity extends AppCompatActivity {
         btnSignIn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Intent in = new Intent(RegisterActivity.this, AwalActivity.class);
+                in.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(in);
                 finish();
             }
         });
@@ -95,7 +98,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             Toast.LENGTH_SHORT).show();
                                 } else {
                                     Toast.makeText(RegisterActivity.this, "Berhasil membuat akun", Toast.LENGTH_SHORT).show();
-                                    Intent inten = new Intent(RegisterActivity.this, EditProfilActivity.class);
+                                    Intent inten = new Intent(RegisterActivity.this, BaruActivity.class);
                                     inten.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(inten);
                                     finish();
@@ -114,17 +117,10 @@ public class RegisterActivity extends AppCompatActivity {
     }
     @Override
     public void onBackPressed() {
-        new AlertDialog.Builder(this)
-                .setTitle("Exit")
-                .setMessage("Are you sure you want to exit?")
-                .setCancelable(false)
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        RegisterActivity.this.finish();
-                    }
-                })
-                .setNegativeButton("No", null)
-                .show();
+        Intent inn = new Intent(RegisterActivity.this, AwalActivity.class);
+        inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(inn);
+        finish();
     }
 
 }

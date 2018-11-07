@@ -75,7 +75,9 @@ public class AwalActivity extends AppCompatActivity
 
         mAuth = FirebaseAuth.getInstance();
         if (mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(this, HomeActivity.class));
+            Intent langsung = new Intent(this, HomeActivity.class);
+            langsung.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(langsung);
             finish();
         }
 
@@ -115,18 +117,18 @@ public class AwalActivity extends AppCompatActivity
             @Override
             public void onClick(View v) {
 
-                Intent ii = new Intent(AwalActivity.this, RegisterActivity.class);
-                ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(ii);
+                Intent up = new Intent(AwalActivity.this, RegisterActivity.class);
+                up.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(up);
             }
         });
 
         btnReset.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent ii = new Intent(AwalActivity.this, ForgotPasswordActivity.class);
-                ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
-                startActivity(ii);
+                Intent reset = new Intent(AwalActivity.this, ForgotPasswordActivity.class);
+                reset.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+                startActivity(reset);
             }
         });
 
@@ -175,7 +177,7 @@ public class AwalActivity extends AppCompatActivity
                                     // there was an error
 
                                     Intent intent = new Intent(AwalActivity.this, HomeActivity.class);
-                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                                    intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                                     startActivity(intent);
                                     finish();
                                 } else {
@@ -233,6 +235,7 @@ public class AwalActivity extends AppCompatActivity
     private void updateUI(boolean isLogin) {
         if (isLogin) {
             Intent home = new Intent(this, HomeActivity.class);
+            home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(home);
             finish();
         }

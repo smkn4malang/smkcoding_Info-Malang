@@ -53,6 +53,7 @@
                     android:layout_marginRight="20dp"
                     android:layout_height="wrap_content"
                     android:contextClickable="true"
+                    android:visibility="gone"
                     >
 
                 </com.google.android.gms.common.SignInButton>
@@ -99,6 +100,7 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:orientation="vertical"
+                android:paddingTop="30dp"
                 >
 
                 <Button
@@ -107,7 +109,7 @@
                     android:layout_height="50dp"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:text="Masuk"
+                    android:text="Sign In"
                     android:textColor="#303030"
                     android:backgroundTint="#fff"/>
 
@@ -120,7 +122,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Anda tidak punya akun?"
+                        android:text="You don't have account?"
                         android:textColor="#303030"
                         android:textSize="15dp"
                         android:layout_marginRight="5dp"
@@ -129,7 +131,7 @@
                         android:id="@+id/txt_register"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Daftar"
+                        android:text="Sign Up"
                         android:textColor="#ff0000"
                         android:textSize="15dp"
                         android:layout_marginRight="5dp"
@@ -145,7 +147,7 @@
                         android:id="@+id/txt_forgot"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Lupa password?"
+                        android:text="Forget password?"
                         android:textColor="#ff0000"
                         android:textSize="15dp"
                         android:layout_marginRight="5dp"

@@ -22,6 +22,7 @@ import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -136,11 +137,15 @@ public class TambahActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        Toast.makeText(TambahActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                         Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
                                 downloadUri.toString());
+//                        mDatabaseRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(upload);
                         String uploadId = mDatabaseRef.push().getKey();
-                        mDatabaseRef.child(uploadId).setValue(upload);
+                        mDatabaseRef.push().setValue(upload);
+
+//                        Upload friendlyMessage = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
+//                        mDatabaseRef.push().setValue(friendlyMessage);
+                        Toast.makeText(TambahActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                         upload();
                     } else {
                         Toast.makeText(TambahActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
@@ -158,11 +163,13 @@ public class TambahActivity extends AppCompatActivity {
     //------------------------------------------------------------
     public void profil(View view) {
         Intent profil = new Intent(this, ProfilActivity.class);
+        profil.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(profil);
         finish();
     }
     public void home (View view) {
         Intent home = new Intent(this, HomeActivity.class);
+        home.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(home);
         finish();
     }
@@ -170,6 +177,14 @@ public class TambahActivity extends AppCompatActivity {
         Intent upload = new Intent(TambahActivity.this, HomeActivity.class);
         upload.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(upload);
+        finish();
+    }
+
+    @Override
+    public void onBackPressed() {
+        Intent inn = new Intent(this, HomeActivity.class);
+        inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
+        startActivity(inn);
         finish();
     }
 }

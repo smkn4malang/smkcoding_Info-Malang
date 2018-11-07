@@ -1,109 +1,5 @@
 package com.tugasakhir.ta;
 
-//import android.content.Intent;
-//import android.support.v7.app.AppCompatActivity;
-//import android.os.Bundle;
-//import android.view.View;
-//import android.view.Window;
-//import android.widget.Button;
-//import android.widget.EditText;
-//import android.widget.ImageView;
-//import android.widget.Toast;
-//
-//import com.bumptech.glide.Glide;
-//import com.nguyenhoanglam.imagepicker.model.Config;
-//import com.nguyenhoanglam.imagepicker.model.Image;
-//import com.nguyenhoanglam.imagepicker.ui.imagepicker.ImagePicker;
-//
-//import java.util.ArrayList;
-//
-//import butterknife.BindView;
-//import butterknife.ButterKnife;
-//import butterknife.OnClick;
-//
-//public class EditProfilActivity extends AppCompatActivity {
-//    public static final String EXTRA_NAME ="EXTRANAME" ;
-//    @BindView(R.id.namaEdit)
-//    EditText Editnama;
-//    @BindView(R.id.jkEdit)
-//    EditText jkedit;
-//    @BindView(R.id.noEdit)
-//    EditText noedit;
-//    @BindView(R.id.tambah)
-//    Button save;
-//    @BindView(R.id.account)
-//    ImageView Account;
-//
-//
-//    private ArrayList<Image> imageLibrary = new ArrayList<>();
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-//        setContentView(R.layout.activity_edit_profil);
-//        ButterKnife.bind(this);
-//
-//    }
-//
-//    public void Utama(View view) {
-//        Intent menu = new Intent(EditProfilActivity.this, HomeActivity.class);
-//        startActivity(menu);
-//        finish();
-//    }
-//
-//
-//    public void profil(View view) {
-//        Intent i = new Intent (this, ProfilActivity.class);
-//        startActivity(i);
-//        finish();
-//    }
-//
-//    //image picker
-//    @OnClick(R.id.account)
-//    public void onViewClickedImage(){
-//        ImagePicker. with (this)
-//                .setFolderMode(true)
-//                .setMaxSize(10)
-//                .setMultipleMode(false)
-//                .setCameraOnly(false)
-//                .setFolderTitle("Albums")
-//                .setSelectedImages(imageLibrary)
-//                .setAlwaysShowDoneButton(true)
-//                .setKeepScreenOn(true)
-//                .start();
-//    }
-//
-//    @Override
-//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//        if (data != null) {
-//            imageLibrary = data.getParcelableArrayListExtra(Config.EXTRA_IMAGES);
-//            Glide.with(this)
-//                    .load(imageLibrary.get(0).getPath()).into(Account);
-//        }else{
-//            Toast.makeText(EditProfilActivity.this, "Isi data dengan lengkap", Toast.LENGTH_SHORT).show();
-//        }
-//    }
-//
-//    @OnClick(R.id. tambah )
-//    public void onViewClicked() {
-//        if (!Editnama.getText().toString().isEmpty()
-//                && !jkedit.getText().toString().isEmpty()
-//                && !noedit.getText().toString().isEmpty()
-//                && !imageLibrary.isEmpty()) {
-////            mSiswaModel = new SiswaModel();
-////            mSiswaModel.setName(edtName.getText().toString());
-////            mSiswaModel.setAddress(edtAddress.getText().toString());
-////            mSiswaModel.setPathPicture(imageLibrary.get(0).getPath().toString());
-////            MyApp. db .userDao().insertAll(mSiswaModel);
-//            Intent intent = new Intent(new Intent(this, ProfilActivity.class));
-//            intent.addFlags(Intent. FLAG_ACTIVITY_NEW_TASK );
-//            intent.addFlags(Intent. FLAG_ACTIVITY_CLEAR_TASK );
-//            startActivity(intent);
-//        }
-//    }
-//}
 import android.annotation.SuppressLint;
 import android.content.ContentResolver;
 import android.content.DialogInterface;
@@ -142,13 +38,13 @@ import com.squareup.picasso.Picasso;
 
 import java.util.Objects;
 
-public class EditProfilActivity extends AppCompatActivity {
+public class BaruActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private static final String TAG = "ViewDatabase";
 
-//    private Button mButtonChooseImage;
+    //    private Button mButtonChooseImage;
     private Button mButtonUpload;
     private ImageView mImageView;
     private ProgressBar mProgressBar;
@@ -170,7 +66,7 @@ public class EditProfilActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.activity_edit_profil);
+        setContentView(R.layout.activity_baru);
 
 //        mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
@@ -194,8 +90,6 @@ public class EditProfilActivity extends AppCompatActivity {
         mRef = mData.getReference("users");
         userID = user.getUid();
 
-        showData();
-
 
         mImageView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -208,52 +102,13 @@ public class EditProfilActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(EditProfilActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(BaruActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
                 } else {
                     uploadFile();
                 }
             }
         });
 
-    }
-
-    private void showData() {
-        mRef.child(userID).addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                User user = dataSnapshot.getValue(User.class);
-                editTextName.setText(Objects.requireNonNull(user).getName());
-                editTextEmail.setText(Objects.requireNonNull(user).getEmail());
-                editTextGender.setText(Objects.requireNonNull(user).getgender());
-                editTextPhone.setText(Objects.requireNonNull(user).getphone());
-                editTextAlamat.setText(Objects.requireNonNull(user).getAlamat());
-
-                url.setText(user.getImageUrl());
-                Picasso.with(EditProfilActivity.this)
-                        .load(user.getImageUrl())
-                        .into(mImageView);
-                notif();
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError databaseError) {
-
-            }
-        });
-
-
-    }
-    private void notif() {
-        mListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    Log.d(TAG, "onAuthStateChanged:sign_in" + user.getUid());
-//                    toastMessage("Berhasil Masuk Dengan Email " + user.getEmail());
-                }
-            }
-        };
     }
 
     @SuppressLint("SetTextI18n")
@@ -342,12 +197,12 @@ public class EditProfilActivity extends AppCompatActivity {
 //                        String uploadId = mDatabaseRef.push().getKey();
 //                        mDatabaseRef.child(uploadId).setValue(user);
                         mDatabaseRef.child(userID).setValue(user);
-                        Intent ii = new Intent(EditProfilActivity.this, HomeActivity.class);
+                        Intent ii = new Intent(BaruActivity.this, HomeActivity.class);
                         ii.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(ii);
                         finish();
                     } else {
-                        Toast.makeText(EditProfilActivity.this, "failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(BaruActivity.this, "failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                         mProgressBar.setVisibility(View.GONE);
                     }
                 }
