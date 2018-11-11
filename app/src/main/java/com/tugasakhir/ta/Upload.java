@@ -3,20 +3,37 @@ package com.tugasakhir.ta;
 import com.google.firebase.database.Exclude;
 
 public class Upload {
-    private String mNama;
+    private String mDesc;
     private String mImageUrl;
+    private String mNama;
+    private String mProfil;
     private String mKey;
 
     public Upload() {
         //empty constructor needed
     }
 
-    public Upload(String nama, String imageUrl) {
-        if (nama.trim().equals("")) {
-            nama = "No Name";
-        }
+    public Upload(String desc, String imageUrl, String nama, String profil) {
 
+        mDesc = desc;
+        mImageUrl = imageUrl;
         mNama = nama;
+        mProfil = profil;
+    }
+
+    public String getDesc() {
+        return mDesc;
+    }
+
+    public void setDesc(String desc) {
+        mDesc = desc;
+    }
+
+    public String getImageUrl() {
+        return mImageUrl;
+    }
+
+    public void setImageUrl(String imageUrl) {
         mImageUrl = imageUrl;
     }
 
@@ -28,12 +45,12 @@ public class Upload {
         mNama = nama;
     }
 
-    public String getImageUrl() {
-        return mImageUrl;
+    public String getProfil() {
+        return mProfil;
     }
 
-    public void setImageUrl(String imageUrl) {
-        mImageUrl = imageUrl;
+    public void setProfil(String profil) {
+        mProfil = profil;
     }
 
     @Exclude

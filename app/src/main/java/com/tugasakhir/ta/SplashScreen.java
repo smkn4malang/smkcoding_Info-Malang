@@ -12,6 +12,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -20,29 +21,10 @@ import android.widget.Toast;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class SplashScreen extends AppCompatActivity {
-    //    TextView tvSplash;
-//
-//    @Override
-//    protected void onCreate(Bundle savedInstanceState) {
-//        super.onCreate(savedInstanceState);
-//        this.supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-//        setContentView(R.layout.activity_splash_screen);
-//
-//        tvSplash = (TextView) findViewById(R.id.tvSplash);
-//
-//
-//        final Handler handler = new Handler();
-//        handler.postDelayed(new Runnable() {
-//            @Override
-//            public void run() {
-//                startActivity(new Intent(getApplicationContext(), AwalActivity.class));
-//                finish();
-//            }
-//        }, 1500L);
-//    }
 
     private ProgressBar mProgressCircle;
     private TextView Text;
+    private ImageView splash;
     private Button Button;
 
 
@@ -55,6 +37,7 @@ public class SplashScreen extends AppCompatActivity {
         mProgressCircle = findViewById(R.id.progress_circle);
         Button = (Button) findViewById(R.id.button);
         Text = (TextView) findViewById(R.id.text);
+        splash = (ImageView) findViewById(R.id.tvSplash);
         ulang();
     }
 
@@ -72,6 +55,7 @@ public class SplashScreen extends AppCompatActivity {
                     finish();
                 } else {
                     mProgressCircle.setVisibility(View.GONE);
+                    splash.setVisibility(View.GONE);
                     Text.setVisibility(View.VISIBLE);
                     Button.setVisibility(View.VISIBLE);
                 }
@@ -82,7 +66,8 @@ public class SplashScreen extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProgressCircle.setVisibility(View.VISIBLE);
+                mProgressCircle.setVisibility(View.GONE);
+                splash.setVisibility(View.VISIBLE);
                 Text.setVisibility(View.GONE);
                 Button.setVisibility(View.GONE);
                 ulang();

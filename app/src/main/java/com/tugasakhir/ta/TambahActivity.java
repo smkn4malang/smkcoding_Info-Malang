@@ -23,8 +23,12 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.OnProgressListener;
 import com.google.firebase.storage.StorageReference;
@@ -32,12 +36,15 @@ import com.google.firebase.storage.StorageTask;
 import com.google.firebase.storage.UploadTask;
 import com.squareup.picasso.Picasso;
 
+import java.util.Objects;
+
 public class TambahActivity extends AppCompatActivity {
     private static final int PICK_IMAGE_REQUEST = 1;
 
     private Button mButtonChooseImage;
     private Button mButtonUpload;
     private EditText mEditTextFileName;
+    private TextView mNama, mProfil;
     private ImageView mImageView;
     private ProgressBar mProgressCircle;
 
@@ -45,6 +52,9 @@ public class TambahActivity extends AppCompatActivity {
 
     private StorageReference mStorageRef;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference mRef;
+
+    private String userID;
 
     private StorageTask mUploadTask;
 
@@ -57,12 +67,18 @@ public class TambahActivity extends AppCompatActivity {
         mButtonChooseImage = findViewById(R.id.button_choose_image);
         mButtonUpload = findViewById(R.id.button_upload);
         mEditTextFileName = findViewById(R.id.edit_text_file_name);
+        mNama = findViewById(R.id.nama);
         mImageView = findViewById(R.id.image_view);
+        mProfil = findViewById(R.id.profil);
 
         mProgressCircle = findViewById(R.id.progress_circle);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        userID = user.getUid();
+
         mStorageRef = FirebaseStorage.getInstance().getReference("uploads");
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mRef = FirebaseDatabase.getInstance().getReference("users");
 
         mButtonChooseImage.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -81,6 +97,26 @@ public class TambahActivity extends AppCompatActivity {
                 }
             }
         });
+
+        mRef.child(userID).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                showData(dataSnapshot);
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+
+            }
+        });
+
+    }
+
+    private void showData(DataSnapshot dataSnapshot) {
+        User user = dataSnapshot.getValue(User.class);
+        mNama.setText(Objects.requireNonNull(user).getName());
+
+        mProfil.setText(user.getImageUrl());
 
     }
 
@@ -137,8 +173,12 @@ public class TambahActivity extends AppCompatActivity {
 
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
-                        Upload upload = new Upload(mEditTextFileName.getText().toString().trim(),
-                                downloadUri.toString());
+                        Upload upload = new Upload(
+                                mEditTextFileName.getText().toString().trim(),
+                                downloadUri.toString(),
+                                mNama.getText().toString().trim(),
+                                mProfil.getText().toString().trim()
+                                );
 //                        mDatabaseRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(upload);
                         String uploadId = mDatabaseRef.push().getKey();
                         mDatabaseRef.push().setValue(upload);

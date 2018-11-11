@@ -36,11 +36,16 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
     @Override
     public void onBindViewHolder(ImageViewHolder holder, int position) {
         Upload uploadCurrent = mUploads.get(position);
-        holder.textViewName.setText(uploadCurrent.getNama());
+        holder.textViewDesc.setText(uploadCurrent.getDesc());
+        holder.textViewNama.setText(uploadCurrent.getNama());
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
-                .placeholder(R.mipmap.ic_launcher)
+                .placeholder(R.drawable.news)
                 .into(holder.imageView);
+        Picasso.with(mContext)
+                .load(uploadCurrent.getProfil())
+                .placeholder(R.drawable.account)
+                .into(holder.profil);
     }
 
     @Override
@@ -50,14 +55,18 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     public class ImageViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener,
             View.OnCreateContextMenuListener, MenuItem.OnMenuItemClickListener {
-        public TextView textViewName;
+        public TextView textViewDesc;
+        public TextView textViewNama;
+        public ImageView profil;
         public ImageView imageView;
 
         public ImageViewHolder(View itemView) {
             super(itemView);
 
-            textViewName = itemView.findViewById(R.id.text_view_name);
+            textViewDesc = itemView.findViewById(R.id.text_view_desc);
             imageView = itemView.findViewById(R.id.image_view_upload);
+            textViewNama = itemView.findViewById(R.id.nama);
+            profil = itemView.findViewById(R.id.gambar);
 
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);

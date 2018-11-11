@@ -26,7 +26,7 @@ public class HomeAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int Position){
         if(Position == 0 ){
-            return "NEWS";
+            return "Other Posts";
         }else if (Position == 1) {
             return "My Posts";
         }

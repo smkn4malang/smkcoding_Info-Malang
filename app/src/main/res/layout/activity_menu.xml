@@ -46,15 +46,22 @@
         android:layout_height="170dp"
         android:background="#FF1AAED4"
         >
-        <RelativeLayout
+        <ImageView
+            android:id="@+id/backg"
             android:layout_width="match_parent"
             android:layout_height="100dp"
             android:orientation="horizontal"
             android:layout_centerInParent="true"
             android:background="@drawable/sampul"
             >
-
-        </RelativeLayout>
+        </ImageView>
+        <ImageView
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:background="@drawable/worldwide"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="8dp"
+            />
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -8,20 +8,19 @@
     android:background="#fff"
     tools:context=".SplashScreen">
 
-    <TextView
+    <ImageView
         android:id="@+id/tvSplash"
-        android:layout_gravity="top|center"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:background="@drawable/images"
-        android:layout_centerHorizontal="true"
+        android:background="@drawable/icon3"
+        android:layout_centerInParent="true"
         />
     <ProgressBar
         android:id="@+id/progress_circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         android:layout_centerInParent="true"
-        android:visibility="visible"
+        android:visibility="gone"
         />
 
         <TextView
