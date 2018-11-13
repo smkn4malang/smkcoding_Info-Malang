@@ -55,7 +55,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ProfilActivity extends AppCompatActivity
-        implements GoogleApiClient.OnConnectionFailedListener{
+        implements ImageAdapter.OnItemClickListener{
     private static final String TAG = "ViewDatabase";
     private ImageView Foto;
     private TextView Nama, Email, url, gender, phone, alamat;
@@ -65,10 +65,20 @@ public class ProfilActivity extends AppCompatActivity
     private FirebaseDatabase mData;
     private FirebaseStorage mStorage;
     private DatabaseReference mDatabaseRef;
+    private DatabaseReference mDatalike;
     private DatabaseReference mRef;
     private String userID;
 
-    private GoogleApiClient googleApiClient;
+    private RecyclerView mRecyclerView;
+    private ImageAdapter mAdapter;
+
+    private ProgressBar mProgressCircle;
+
+    private ValueEventListener mDBListener;
+
+    private List<Upload> mUploads;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -85,7 +95,6 @@ public class ProfilActivity extends AppCompatActivity
         alamat = (TextView) findViewById(R.id.alamat);
 //        edit = (TextView) findViewById(R.id.edit_profil);
         Tambah = (ImageButton) findViewById(R.id.tambah);
-//ambil data user email
 //-----------------------------------------------------------------------------------
         url = (TextView) findViewById(R.id.url);
 
@@ -106,39 +115,52 @@ public class ProfilActivity extends AppCompatActivity
 
             }
         });
-//-----------------------------------------------------------------------------------
-
-//        edit.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                startActivity(new Intent(ProfilActivity.this, EditProfilActivity.class));
-//            }
-//        });
 
         notif();
 
-
-        GoogleSignInOptions signInOptions = new
-                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.default_web_client_id))
-                .requestEmail()
-                .build();
-
-        googleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this, this)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions)
-                .build();
-//-------------------------------------------------------
-        //get firebase auth instance
         Email = (TextView) findViewById(R.id.email);
 
-        //get current user
-//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        setDataToView(user);
-//-----------------------------------------------------------
+        mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mProgressCircle = findViewById(R.id.progress_circle);
+
+        mUploads = new ArrayList<>();
+
+        mAdapter = new ImageAdapter(ProfilActivity.this, mUploads);
+
+        mRecyclerView.setAdapter(mAdapter);
+
+        mAdapter.setOnItemClickListener(ProfilActivity.this);
 
         mStorage = FirebaseStorage.getInstance();
         mDatabaseRef = FirebaseDatabase.getInstance().getReference("uploads");
+        mDatalike = FirebaseDatabase.getInstance().getReference("like");
+
+        mDBListener = mDatabaseRef.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+
+                mUploads.clear();
+
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
+                    Upload upload = postSnapshot.getValue(Upload.class);
+                    upload.setKey(postSnapshot.getKey());
+                    mUploads.add(upload);
+                }
+
+                mAdapter.notifyDataSetChanged();
+
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                Toast.makeText(ProfilActivity.this, databaseError.getMessage(), Toast.LENGTH_SHORT).show();
+                mProgressCircle.setVisibility(View.INVISIBLE);
+            }
+        });
+
     }
 //    proses user email
 //-----------------------------------------------------------------------------
@@ -168,15 +190,6 @@ public class ProfilActivity extends AppCompatActivity
             }
         };
     }
-//-----------------------------------------------------------------------------
-    //Email
-//    @SuppressLint("SetTextI18n")
-//    private void setDataToView(FirebaseUser user) {
-//
-//        Email.setText(user.getEmail());
-//
-//
-//    }
 
 
     @Override
@@ -191,62 +204,12 @@ public class ProfilActivity extends AppCompatActivity
         finish();
     }
 
-    //Email
-    @Override
-    public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
-
-    }
 
     @Override
     protected void onStart(){
         super.onStart();
         mauth.addAuthStateListener(mListener);
-        OptionalPendingResult<GoogleSignInResult> opr = Auth.GoogleSignInApi.silentSignIn(googleApiClient);
-        if(opr.isDone()){
-            GoogleSignInResult result = opr.get();
-            handleSignInResult(result);
-        }else {
-            opr.setResultCallback(new ResultCallback<GoogleSignInResult>() {
-                @Override
-                public void onResult(@NonNull GoogleSignInResult googleSignInResult) {
-                    handleSignInResult(googleSignInResult);
-                }
-            });
-        }
     }
-
-
-    private void handleSignInResult(GoogleSignInResult result) {
-        if(result.isSuccess()){
-//            Person person =  Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-            GoogleSignInAccount account = result.getSignInAccount();
-            Nama.setText(account.getDisplayName());
-            Email.setText(account.getEmail());
-//            gender.setText(account.get);
-
-            Glide.with(this).load(account.getPhotoUrl().toString()).into(Foto);
-        }
-    }
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-//        if (requestCode == RC_SIGN_IN) {
-//            GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
-//            handleSignInResult(result);
-//
-//            // G+
-//            Person person  = Plus.PeopleApi.getCurrentPerson(mGoogleApiClient);
-//            Log.i(TAG, "--------------------------------");
-//            Log.i(TAG, "Display Name: " + person.getDisplayName());
-//            Log.i(TAG, "Gender: " + person.getGender());
-//            Log.i(TAG, "AboutMe: " + person.getAboutMe());
-//            Log.i(TAG, "Birthday: " + person.getBirthday());
-//            Log.i(TAG, "Current Location: " + person.getCurrentLocation());
-//            Log.i(TAG, "Language: " + person.getLanguage());
-//        }
-//    }
 
     public void tambah(View view) {
         Intent tambah = new Intent(ProfilActivity.this, TambahActivity.class);
@@ -268,6 +231,38 @@ public class ProfilActivity extends AppCompatActivity
         inn.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NEW_TASK);
         startActivity(inn);
         finish();
+    }
+
+    @Override
+    public void onItemClick(int position) {
+        Toast.makeText(this, "Normal click at position: " + position, Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onDeleteClick(int position) {
+        Upload selectedItem = mUploads.get(position);
+        final String selectedKey = selectedItem.getKey();
+
+            FirebaseDatabase.getInstance().getReference().addValueEventListener(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    mDatabaseRef.child(selectedKey).removeValue();
+                    mDatalike.child(selectedKey).child(userID).removeValue();
+
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                }
+            });
+
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        mDatabaseRef.removeEventListener(mDBListener);
     }
 }
 

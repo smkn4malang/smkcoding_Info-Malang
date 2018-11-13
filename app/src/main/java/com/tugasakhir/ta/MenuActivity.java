@@ -108,23 +108,6 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
             }
         });
 
-//        GoogleSignInOptions signInOptions = new
-//                GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-//                .requestIdToken(getString(R.string.default_web_client_id))
-//                .requestEmail()
-//                .build();
-//
-//        googleApiClient = new GoogleApiClient.Builder(this)
-//                .enableAutoManage(this, this)
-//                .addApi(Auth.GOOGLE_SIGN_IN_API, signInOptions)
-//                .build();
-//----------------------------------------------------------------------------
-        //get firebase auth instance
-
-        //get current user
-//        final FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-//        setDataToView(user);
-
         authListener = new FirebaseAuth.AuthStateListener() {
             @Override
             public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
@@ -163,30 +146,6 @@ public class MenuActivity extends AppCompatActivity implements GoogleApiClient.O
 
     }
 
-//    private void notif() {
-//        mListener = new FirebaseAuth.AuthStateListener() {
-//            @Override
-//            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-//                FirebaseUser user = firebaseAuth.getCurrentUser();
-//                if(user != null){
-//                    Log.d(TAG, "onAuthStateChanged:sign_in" + user.getUid());
-//                    toastMessage("Berhasil Masuk Dengan Email " + user.getEmail());
-//                }else{
-//                    Log.d(TAG, "onAuthStateChanged:sign_out" + user.getUid());
-//                    toastMessage("Gagal Masuk");
-//                }
-//            }
-//        };
-//    }
-//-----------------------------------------------------------------------------
-    //    ----------------------------------------------------------
-//    @SuppressLint("SetTextI18n")
-//    private void setDataToView(FirebaseUser user) {
-//
-//        Email3.setText(user.getEmail());
-//
-//
-//    }
 
     // this listener will be called when there is change in firebase user session
     FirebaseAuth.AuthStateListener authListener = new FirebaseAuth.AuthStateListener() {

@@ -90,11 +90,7 @@ public class TambahActivity extends AppCompatActivity {
         mButtonUpload.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mUploadTask != null && mUploadTask.isInProgress()) {
-                    Toast.makeText(TambahActivity.this, "Upload in progress", Toast.LENGTH_SHORT).show();
-                } else {
-                    uploadFile();
-                }
+                uploadFile();
             }
         });
 
@@ -146,7 +142,8 @@ public class TambahActivity extends AppCompatActivity {
     }
 
     private void uploadFile() {
-        if (mEditTextFileName != null) {
+        final String desc = mEditTextFileName.getText().toString().trim();
+         if(mImageUri != null ){
             mProgressCircle.setVisibility(View.VISIBLE);
             final StorageReference fileReference = mStorageRef.child(System.currentTimeMillis()
                     + "." + getFileExtension(mImageUri));
@@ -174,29 +171,46 @@ public class TambahActivity extends AppCompatActivity {
                     if (task.isSuccessful()) {
                         Uri downloadUri = task.getResult();
                         Upload upload = new Upload(
-                                mEditTextFileName.getText().toString().trim(),
+                                desc,
                                 downloadUri.toString(),
                                 mNama.getText().toString().trim(),
                                 mProfil.getText().toString().trim()
-                                );
-//                        mDatabaseRef.child(FirebaseAuth.getInstance().getCurrentUser().getUid()).setValue(upload);
-                        String uploadId = mDatabaseRef.push().getKey();
-                        mDatabaseRef.push().setValue(upload);
-
+                        );
+//                        String uploadId = mDatabaseRef.push().getKey();
+//                        mDatabaseRef.push().setValue(upload);
+//                        Uri downloadUri = task.getResult();
 //                        Upload friendlyMessage = new Upload(mEditTextFileName.getText().toString().trim(), downloadUri.toString());
 //                        mDatabaseRef.push().setValue(friendlyMessage);
+                        String uploadId = mDatabaseRef.push().getKey();
+                        mDatabaseRef.child(uploadId).setValue(upload);
+
                         Toast.makeText(TambahActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
                         upload();
-                    } else {
+                    }
+                    else {
                         Toast.makeText(TambahActivity.this, "upload failed: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
 
                     }
                 }
             });
-
+        }
+        else if(desc.isEmpty()) {
+            mEditTextFileName.setError("Request text");
+            mEditTextFileName.requestFocus();
         }
         else {
-            Toast.makeText(this, "Tulis Keterangan", Toast.LENGTH_SHORT).show();
+
+            Upload upload = new Upload(
+                    mEditTextFileName.getText().toString().trim(),
+                    null,
+                    mNama.getText().toString().trim(),
+                    mProfil.getText().toString().trim()
+            );
+            String uploadId = mDatabaseRef.push().getKey();
+            mDatabaseRef.child(uploadId).setValue(upload);
+
+            Toast.makeText(TambahActivity.this, "Upload successful", Toast.LENGTH_LONG).show();
+            upload();
         }
     }
 

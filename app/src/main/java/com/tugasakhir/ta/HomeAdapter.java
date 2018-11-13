@@ -26,9 +26,9 @@ public class HomeAdapter extends FragmentStatePagerAdapter {
     @Override
     public CharSequence getPageTitle(int Position){
         if(Position == 0 ){
-            return "Other Posts";
+            return "C'News";
         }else if (Position == 1) {
-            return "My Posts";
+            return "Other C'News";
         }
         throw new IllegalStateException("Position not valid");
     }

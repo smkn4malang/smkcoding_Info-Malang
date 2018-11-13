@@ -66,7 +66,7 @@
                     android:id="@+id/edit_text_file_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="10dp"
+                    android:layout_margin="5dp"
                     android:gravity="top"
                     android:hint="Added New Information"
                     android:textColor="#303030"
@@ -74,18 +74,34 @@
                     android:backgroundTint="@color/colorPrimaryDark"/>
 
             </LinearLayout>
-
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Pick Image : "
+                    android:textSize="16dp"/>
+                <Button
+                    android:id="@+id/button_choose_image"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:background="@drawable/imagepicker_ic_image"/>
+            </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content">
 
                 <ImageView
                     android:id="@+id/image_view"
-                    android:layout_width="350dp"
-                    android:layout_height="350dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/imagepicker_ic_image"/>
+                    />
 
             </RelativeLayout>
 
@@ -93,19 +109,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
-
-                <Button
-                    android:id="@+id/button_choose_image"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Put Image"
-                    android:textColor="#fff"
-                    android:textSize="18dp"
-                    android:textStyle="bold"
-                    android:layout_margin="3dp"
-                    android:backgroundTint="#01a3cc"
-                    android:backgroundTintMode="multiply"/>
 
                 <Button
                     android:id="@+id/button_upload"

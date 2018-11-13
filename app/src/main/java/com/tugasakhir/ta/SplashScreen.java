@@ -66,7 +66,7 @@ public class SplashScreen extends AppCompatActivity {
         Button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mProgressCircle.setVisibility(View.GONE);
+                mProgressCircle.setVisibility(View.VISIBLE);
                 splash.setVisibility(View.VISIBLE);
                 Text.setVisibility(View.GONE);
                 Button.setVisibility(View.GONE);

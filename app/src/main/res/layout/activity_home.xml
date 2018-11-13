@@ -33,7 +33,7 @@
             android:text="C'NEWS"
             android:textStyle="bold"
             android:textColor="#303030"
-            android:textSize="30dp"
+            android:textSize="24dp"
             />
 
         <ImageButton
@@ -62,14 +62,6 @@
         android:layout_below="@+id/tab"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-    <android.support.design.widget.FloatingActionButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:layout_alignParentEnd="true"
-        android:layout_margin="10dp"
-        android:src="@drawable/plus"
-        android:onClick="Tambah"
-        />
+
 
 </RelativeLayout>

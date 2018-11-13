@@ -92,7 +92,7 @@
                 android:gravity="right|center"
                 android:text="nama"
                 android:textStyle="bold"
-                android:textSize="18dp"
+                android:textSize="22dp"
                 android:layout_marginLeft="8dp"
                 android:layout_marginTop="5dp"
                 android:textColor="#fff"
@@ -149,6 +149,13 @@
             android:layout_marginLeft="20dp"
             />
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/klik"/>
+
     </LinearLayout>
 
     <LinearLayout
@@ -190,6 +197,12 @@
             android:layout_marginLeft="20dp"
             android:onClick="profil"
             />
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/klik"/>
 
     </LinearLayout>
 
@@ -230,6 +243,13 @@
             android:textSize="18dp" />
 
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/klik"/>
+
     </LinearLayout>
     <LinearLayout
         android:id="@+id/tentang"
@@ -267,6 +287,13 @@
             android:textColor="#FF303030"
             android:textSize="18dp" />
 
+
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/klik"/>
     </LinearLayout>
     <LinearLayout
         android:layout_below="@+id/tentang"
@@ -304,6 +331,12 @@
             />
 
 
+        <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_gravity="center"
+            android:layout_marginRight="10dp"
+            android:src="@drawable/klik"/>
     </LinearLayout>
     <ProgressBar
         android:id="@+id/progress_circle"

@@ -8,249 +8,32 @@
     android:background="#e2e2e2">
 
     <!-- TODO: Update blank fragment layout -->
-    <!-- <ScrollView
+
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <LinearLayout
+
+        <ProgressBar
+            android:id="@+id/progress_circle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:progressBackgroundTint="@color/colorPrimaryDark"
+            />
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_below="@+id/relativ"
+            android:id="@+id/recycler_view"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_weight="1.5">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/account"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:paddingBottom="30dp"
-                        android:textColor="#303030"
-                        android:textSize="18dp"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:gravity="left|center"
-                        android:text="nama"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
-                        android:textSize="15dp"
-                        android:textColor="#303030"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="210dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#565454"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/like"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:layout_height="40dp"
-                        android:gravity="left|center"
-                        android:text="15"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        android:textColor="#000"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="25dp"
-                        android:gravity="center"
-                        android:text=". . ."
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:textColor="#000"
-                        />
-                    <Button
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/komen"
-                        />
-
-                </LinearLayout>
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    android:layout_weight="1.5">
-
-                    <ImageView
-                        android:layout_width="50dp"
-                        android:layout_height="50dp"
-                        android:layout_margin="10dp"
-                        android:background="@drawable/account"/>
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:layout_marginLeft="5dp"
-                        android:paddingBottom="30dp"
-                        android:textColor="#303030"
-                        android:textSize="18dp"
-                        android:layout_weight="1"
-                        android:textStyle="bold"
-                        android:gravity="left|center"
-                        android:text="nama"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_weight="1.5">
-
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_margin="10dp"
-                        android:text="Deskripsi Text blablablabla blablalala blabl ablabla blablblabla blabl abla blbl abla blla blablablabllbabl ablblblblab llba . . ."
-                        android:textSize="15dp"
-                        android:textColor="#303030"
-                        />
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="210dp">
-
-                    <ImageView
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginTop="10dp"
-                        android:layout_marginBottom="10dp"
-                        android:background="#565454"/>
-
-                </LinearLayout>
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="50dp"
-                    android:orientation="horizontal"
-                    android:gravity="center"
-                    >
-                    <Button
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:layout_height="40dp"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/like"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="2"
-                        android:layout_height="40dp"
-                        android:gravity="left|center"
-                        android:text="15"
-                        android:layout_marginBottom="5dp"
-                        android:textStyle="bold"
-                        android:textSize="20dp"
-                        android:textColor="#000"
-                        />
-                    <TextView
-                        android:layout_width="match_parent"
-                        android:layout_weight="1"
-                        android:layout_height="40dp"
-                        android:layout_marginRight="50dp"
-                        android:layout_marginBottom="25dp"
-                        android:gravity="center"
-                        android:text=". . ."
-                        android:textStyle="bold"
-                        android:textSize="30dp"
-                        android:textColor="#000"
-                        />
-                    <Button
-                        android:layout_width="35dp"
-                        android:layout_height="35dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="5dp"
-                        android:gravity="center"
-                        android:background="@drawable/komen"
-                        />
-
-                </LinearLayout>
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </ScrollView> -->
-    <ProgressBar
-        android:id="@+id/progress_circle"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:progressBackgroundTint="@color/colorPrimaryDark"
-        />
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_below="@+id/relativ"
-        android:id="@+id/recycler_view"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+            android:layout_height="match_parent" />
+        <android.support.design.widget.FloatingActionButton
+            android:id="@+id/floating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/plus"/>
+    </RelativeLayout>
 
 </FrameLayout>
