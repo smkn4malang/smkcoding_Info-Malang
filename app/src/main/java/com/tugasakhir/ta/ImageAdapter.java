@@ -1,6 +1,7 @@
 package com.tugasakhir.ta;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -14,6 +15,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -60,7 +62,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
     @Override
     public void onBindViewHolder(ImageViewHolder holder, final int position) {
-        Upload uploadCurrent = mUploads.get(position);
+        final Upload uploadCurrent = mUploads.get(position);
         final String selectedKey = uploadCurrent.getKey();
         holder.textViewDesc.setText(uploadCurrent.getDesc());
         holder.textViewNama.setText(uploadCurrent.getNama());
@@ -68,15 +70,11 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
         Picasso.with(mContext)
                 .load(uploadCurrent.getImageUrl())
-
                 .into(holder.imageView);
         Picasso.with(mContext)
                 .load(uploadCurrent.getProfil())
                 .placeholder(R.drawable.account)
                 .into(holder.profil);
-
-
-
 
         holder.like.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -108,6 +106,17 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
 
             }
         });
+
+        holder.komen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(mContext, CommentsActivity.class);
+                intent.putExtra("postId", selectedKey);
+                intent.putExtra("publisherId", selectedKey);
+                mContext.startActivity(intent);
+            }
+        });
+
     }
 
     @Override
@@ -125,7 +134,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
         public ImageView imageView;
         public ImageView menu;
         public ImageButton like;
-
+        public ImageButton komen;
 
         private DatabaseReference mDataLike;
         private FirebaseAuth mAuth;
@@ -139,6 +148,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             profil = itemView.findViewById(R.id.gambar);
             menu = itemView.findViewById(R.id.menu);
             like = itemView.findViewById(R.id.like_btn);
+            komen = itemView.findViewById(R.id.comment_btn);
 
 
             mDataLike = FirebaseDatabase.getInstance().getReference().child("like");
@@ -149,6 +159,7 @@ public class ImageAdapter extends RecyclerView.Adapter<ImageAdapter.ImageViewHol
             itemView.setOnClickListener(this);
             itemView.setOnCreateContextMenuListener(this);
         }
+
 
         public void setLikeBtn(final String selectedKey){
             mDataLike.addValueEventListener(new ValueEventListener() {

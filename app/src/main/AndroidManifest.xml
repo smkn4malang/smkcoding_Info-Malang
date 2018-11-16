@@ -29,7 +29,8 @@
         <activity android:name=".RegisterActivity" />
         <activity android:name=".ForgotPasswordActivity" />
         <activity android:name=".TambahActivity" />
-        <activity android:name=".BaruActivity"></activity>
+        <activity android:name=".BaruActivity" />
+        <activity android:name=".CommentsActivity"></activity>
     </application>
 
 </manifest>
